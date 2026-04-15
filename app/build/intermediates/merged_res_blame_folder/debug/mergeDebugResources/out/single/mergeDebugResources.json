@@ -1,0 +1,198 @@
+[
+    {
+        "merged": "com.mobile.sca.app-debug-4:/drawable_bg_status_inactive.xml.flat",
+        "source": "com.mobile.sca.app-main-6:/drawable/bg_status_inactive.xml"
+    },
+    {
+        "merged": "com.mobile.sca.app-debug-4:/drawable_bg_segment_unselected.xml.flat",
+        "source": "com.mobile.sca.app-main-6:/drawable/bg_segment_unselected.xml"
+    },
+    {
+        "merged": "com.mobile.sca.app-debug-4:/layout_alarm_item_status.xml.flat",
+        "source": "com.mobile.sca.app-main-6:/layout/alarm_item_status.xml"
+    },
+    {
+        "merged": "com.mobile.sca.app-debug-4:/drawable_bg_segment_container.xml.flat",
+        "source": "com.mobile.sca.app-main-6:/drawable/bg_segment_container.xml"
+    },
+    {
+        "merged": "com.mobile.sca.app-debug-4:/drawable_cropped_circle_image.png.flat",
+        "source": "com.mobile.sca.app-main-6:/drawable/cropped_circle_image.png"
+    },
+    {
+        "merged": "com.mobile.sca.app-debug-4:/layout_activity_login.xml.flat",
+        "source": "com.mobile.sca.app-main-6:/layout/activity_login.xml"
+    },
+    {
+        "merged": "com.mobile.sca.app-debug-4:/layout_activity_splash.xml.flat",
+        "source": "com.mobile.sca.app-main-6:/layout/activity_splash.xml"
+    },
+    {
+        "merged": "com.mobile.sca.app-debug-4:/layout_activity_database.xml.flat",
+        "source": "com.mobile.sca.app-main-6:/layout/activity_database.xml"
+    },
+    {
+        "merged": "com.mobile.sca.app-debug-4:/layout_activity_alarm_list.xml.flat",
+        "source": "com.mobile.sca.app-main-6:/layout/activity_alarm_list.xml"
+    },
+    {
+        "merged": "com.mobile.sca.app-debug-4:/color_chip_bg_selector.xml.flat",
+        "source": "com.mobile.sca.app-main-6:/color/chip_bg_selector.xml"
+    },
+    {
+        "merged": "com.mobile.sca.app-debug-4:/menu_bottom_menu.xml.flat",
+        "source": "com.mobile.sca.app-main-6:/menu/bottom_menu.xml"
+    },
+    {
+        "merged": "com.mobile.sca.app-debug-4:/xml_data_extraction_rules.xml.flat",
+        "source": "com.mobile.sca.app-main-6:/xml/data_extraction_rules.xml"
+    },
+    {
+        "merged": "com.mobile.sca.app-debug-4:/layout_item.xml.flat",
+        "source": "com.mobile.sca.app-main-6:/layout/item.xml"
+    },
+    {
+        "merged": "com.mobile.sca.app-debug-4:/drawable_bg_completed.xml.flat",
+        "source": "com.mobile.sca.app-main-6:/drawable/bg_completed.xml"
+    },
+    {
+        "merged": "com.mobile.sca.app-debug-4:/drawable_meet.xml.flat",
+        "source": "com.mobile.sca.app-main-6:/drawable/meet.xml"
+    },
+    {
+        "merged": "com.mobile.sca.app-debug-4:/drawable_dnd_app_icon.png.flat",
+        "source": "com.mobile.sca.app-main-6:/drawable/dnd_app_icon.png"
+    },
+    {
+        "merged": "com.mobile.sca.app-debug-4:/layout_item_phone.xml.flat",
+        "source": "com.mobile.sca.app-main-6:/layout/item_phone.xml"
+    },
+    {
+        "merged": "com.mobile.sca.app-debug-4:/xml_backup_rules.xml.flat",
+        "source": "com.mobile.sca.app-main-6:/xml/backup_rules.xml"
+    },
+    {
+        "merged": "com.mobile.sca.app-debug-4:/layout_item_alarm.xml.flat",
+        "source": "com.mobile.sca.app-main-6:/layout/item_alarm.xml"
+    },
+    {
+        "merged": "com.mobile.sca.app-debug-4:/drawable_setting.xml.flat",
+        "source": "com.mobile.sca.app-main-6:/drawable/setting.xml"
+    },
+    {
+        "merged": "com.mobile.sca.app-debug-4:/drawable_bg_fired.xml.flat",
+        "source": "com.mobile.sca.app-main-6:/drawable/bg_fired.xml"
+    },
+    {
+        "merged": "com.mobile.sca.app-debug-4:/color_chip_selector.xml.flat",
+        "source": "com.mobile.sca.app-main-6:/color/chip_selector.xml"
+    },
+    {
+        "merged": "com.mobile.sca.app-debug-4:/drawable_bg_status_fired.xml.flat",
+        "source": "com.mobile.sca.app-main-6:/drawable/bg_status_fired.xml"
+    },
+    {
+        "merged": "com.mobile.sca.app-debug-4:/layout_permissioncheck.xml.flat",
+        "source": "com.mobile.sca.app-main-6:/layout/permissioncheck.xml"
+    },
+    {
+        "merged": "com.mobile.sca.app-debug-4:/drawable_bg_active.xml.flat",
+        "source": "com.mobile.sca.app-main-6:/drawable/bg_active.xml"
+    },
+    {
+        "merged": "com.mobile.sca.app-debug-4:/layout_support_us.xml.flat",
+        "source": "com.mobile.sca.app-main-6:/layout/support_us.xml"
+    },
+    {
+        "merged": "com.mobile.sca.app-debug-4:/layout_new_design.xml.flat",
+        "source": "com.mobile.sca.app-main-6:/layout/new_design.xml"
+    },
+    {
+        "merged": "com.mobile.sca.app-debug-4:/layout_list.xml.flat",
+        "source": "com.mobile.sca.app-main-6:/layout/list.xml"
+    },
+    {
+        "merged": "com.mobile.sca.app-debug-4:/layout_schdule.xml.flat",
+        "source": "com.mobile.sca.app-main-6:/layout/schdule.xml"
+    },
+    {
+        "merged": "com.mobile.sca.app-debug-4:/drawable_bg_cancelled.xml.flat",
+        "source": "com.mobile.sca.app-main-6:/drawable/bg_cancelled.xml"
+    },
+    {
+        "merged": "com.mobile.sca.app-debug-4:/layout_welcome.xml.flat",
+        "source": "com.mobile.sca.app-main-6:/layout/welcome.xml"
+    },
+    {
+        "merged": "com.mobile.sca.app-debug-4:/xml_accessibility_service_config.xml.flat",
+        "source": "com.mobile.sca.app-main-6:/xml/accessibility_service_config.xml"
+    },
+    {
+        "merged": "com.mobile.sca.app-debug-4:/layout_item_otp.xml.flat",
+        "source": "com.mobile.sca.app-main-6:/layout/item_otp.xml"
+    },
+    {
+        "merged": "com.mobile.sca.app-debug-4:/drawable_edit_bg.xml.flat",
+        "source": "com.mobile.sca.app-main-6:/drawable/edit_bg.xml"
+    },
+    {
+        "merged": "com.mobile.sca.app-debug-4:/drawable_home.xml.flat",
+        "source": "com.mobile.sca.app-main-6:/drawable/home.xml"
+    },
+    {
+        "merged": "com.mobile.sca.app-debug-4:/drawable_error_circle.xml.flat",
+        "source": "com.mobile.sca.app-main-6:/drawable/error_circle.xml"
+    },
+    {
+        "merged": "com.mobile.sca.app-debug-4:/drawable_bg_status_active.xml.flat",
+        "source": "com.mobile.sca.app-main-6:/drawable/bg_status_active.xml"
+    },
+    {
+        "merged": "com.mobile.sca.app-debug-4:/drawable_outline_delete_24.xml.flat",
+        "source": "com.mobile.sca.app-main-6:/drawable/outline_delete_24.xml"
+    },
+    {
+        "merged": "com.mobile.sca.app-debug-4:/layout_item1.xml.flat",
+        "source": "com.mobile.sca.app-main-6:/layout/item1.xml"
+    },
+    {
+        "merged": "com.mobile.sca.app-debug-4:/drawable_dot_background.xml.flat",
+        "source": "com.mobile.sca.app-main-6:/drawable/dot_background.xml"
+    },
+    {
+        "merged": "com.mobile.sca.app-debug-4:/drawable_cal.png.flat",
+        "source": "com.mobile.sca.app-main-6:/drawable/cal.png"
+    },
+    {
+        "merged": "com.mobile.sca.app-debug-4:/drawable_bg_rounded_white.xml.flat",
+        "source": "com.mobile.sca.app-main-6:/drawable/bg_rounded_white.xml"
+    },
+    {
+        "merged": "com.mobile.sca.app-debug-4:/layout_row_alarm.xml.flat",
+        "source": "com.mobile.sca.app-main-6:/layout/row_alarm.xml"
+    },
+    {
+        "merged": "com.mobile.sca.app-debug-4:/layout_onboarding.xml.flat",
+        "source": "com.mobile.sca.app-main-6:/layout/onboarding.xml"
+    },
+    {
+        "merged": "com.mobile.sca.app-debug-4:/drawable_error_center_x.xml.flat",
+        "source": "com.mobile.sca.app-main-6:/drawable/error_center_x.xml"
+    },
+    {
+        "merged": "com.mobile.sca.app-debug-4:/layout_activity_home.xml.flat",
+        "source": "com.mobile.sca.app-main-6:/layout/activity_home.xml"
+    },
+    {
+        "merged": "com.mobile.sca.app-debug-4:/drawable_dot_selector.xml.flat",
+        "source": "com.mobile.sca.app-main-6:/drawable/dot_selector.xml"
+    },
+    {
+        "merged": "com.mobile.sca.app-debug-4:/drawable_bg_segment_selected.xml.flat",
+        "source": "com.mobile.sca.app-main-6:/drawable/bg_segment_selected.xml"
+    },
+    {
+        "merged": "com.mobile.sca.app-debug-4:/layout_item_name.xml.flat",
+        "source": "com.mobile.sca.app-main-6:/layout/item_name.xml"
+    }
+]

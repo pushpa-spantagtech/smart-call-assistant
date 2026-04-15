@@ -1,0 +1,198 @@
+[
+    {
+        "merged": "/Users/johnbritto1/.gradle/daemon/8.9/com.mobile.sca.app-merged_res-81:/layout_item_phone.xml.flat",
+        "source": "/Users/johnbritto1/.gradle/daemon/8.9/com.mobile.sca.app-main-82:/layout/item_phone.xml"
+    },
+    {
+        "merged": "/Users/johnbritto1/.gradle/daemon/8.9/com.mobile.sca.app-merged_res-81:/layout_permissioncheck.xml.flat",
+        "source": "/Users/johnbritto1/.gradle/daemon/8.9/com.mobile.sca.app-main-82:/layout/permissioncheck.xml"
+    },
+    {
+        "merged": "/Users/johnbritto1/.gradle/daemon/8.9/com.mobile.sca.app-merged_res-81:/xml_backup_rules.xml.flat",
+        "source": "/Users/johnbritto1/.gradle/daemon/8.9/com.mobile.sca.app-main-82:/xml/backup_rules.xml"
+    },
+    {
+        "merged": "/Users/johnbritto1/.gradle/daemon/8.9/com.mobile.sca.app-merged_res-81:/layout_list.xml.flat",
+        "source": "/Users/johnbritto1/.gradle/daemon/8.9/com.mobile.sca.app-main-82:/layout/list.xml"
+    },
+    {
+        "merged": "/Users/johnbritto1/.gradle/daemon/8.9/com.mobile.sca.app-merged_res-81:/layout_new_design.xml.flat",
+        "source": "/Users/johnbritto1/.gradle/daemon/8.9/com.mobile.sca.app-main-82:/layout/new_design.xml"
+    },
+    {
+        "merged": "/Users/johnbritto1/.gradle/daemon/8.9/com.mobile.sca.app-merged_res-81:/drawable_bg_rounded_white.xml.flat",
+        "source": "/Users/johnbritto1/.gradle/daemon/8.9/com.mobile.sca.app-main-82:/drawable/bg_rounded_white.xml"
+    },
+    {
+        "merged": "/Users/johnbritto1/.gradle/daemon/8.9/com.mobile.sca.app-merged_res-81:/drawable_dot_selector.xml.flat",
+        "source": "/Users/johnbritto1/.gradle/daemon/8.9/com.mobile.sca.app-main-82:/drawable/dot_selector.xml"
+    },
+    {
+        "merged": "/Users/johnbritto1/.gradle/daemon/8.9/com.mobile.sca.app-merged_res-81:/layout_item1.xml.flat",
+        "source": "/Users/johnbritto1/.gradle/daemon/8.9/com.mobile.sca.app-main-82:/layout/item1.xml"
+    },
+    {
+        "merged": "/Users/johnbritto1/.gradle/daemon/8.9/com.mobile.sca.app-merged_res-81:/drawable_dnd_app_icon.png.flat",
+        "source": "/Users/johnbritto1/.gradle/daemon/8.9/com.mobile.sca.app-main-82:/drawable/dnd_app_icon.png"
+    },
+    {
+        "merged": "/Users/johnbritto1/.gradle/daemon/8.9/com.mobile.sca.app-merged_res-81:/drawable_cal.png.flat",
+        "source": "/Users/johnbritto1/.gradle/daemon/8.9/com.mobile.sca.app-main-82:/drawable/cal.png"
+    },
+    {
+        "merged": "/Users/johnbritto1/.gradle/daemon/8.9/com.mobile.sca.app-merged_res-81:/drawable_home.xml.flat",
+        "source": "/Users/johnbritto1/.gradle/daemon/8.9/com.mobile.sca.app-main-82:/drawable/home.xml"
+    },
+    {
+        "merged": "com.mobile.sca.app-merged_res-81:/drawable_outline_delete_24.xml.flat",
+        "source": "com.mobile.sca.app-main-82:/drawable/outline_delete_24.xml"
+    },
+    {
+        "merged": "/Users/johnbritto1/.gradle/daemon/8.9/com.mobile.sca.app-merged_res-81:/drawable_bg_status_active.xml.flat",
+        "source": "/Users/johnbritto1/.gradle/daemon/8.9/com.mobile.sca.app-main-82:/drawable/bg_status_active.xml"
+    },
+    {
+        "merged": "/Users/johnbritto1/.gradle/daemon/8.9/com.mobile.sca.app-merged_res-81:/menu_bottom_menu.xml.flat",
+        "source": "/Users/johnbritto1/.gradle/daemon/8.9/com.mobile.sca.app-main-82:/menu/bottom_menu.xml"
+    },
+    {
+        "merged": "/Users/johnbritto1/.gradle/daemon/8.9/com.mobile.sca.app-merged_res-81:/drawable_bg_segment_container.xml.flat",
+        "source": "/Users/johnbritto1/.gradle/daemon/8.9/com.mobile.sca.app-main-82:/drawable/bg_segment_container.xml"
+    },
+    {
+        "merged": "/Users/johnbritto1/.gradle/daemon/8.9/com.mobile.sca.app-merged_res-81:/color_chip_bg_selector.xml.flat",
+        "source": "/Users/johnbritto1/.gradle/daemon/8.9/com.mobile.sca.app-main-82:/color/chip_bg_selector.xml"
+    },
+    {
+        "merged": "/Users/johnbritto1/.gradle/daemon/8.9/com.mobile.sca.app-merged_res-81:/drawable_bg_active.xml.flat",
+        "source": "/Users/johnbritto1/.gradle/daemon/8.9/com.mobile.sca.app-main-82:/drawable/bg_active.xml"
+    },
+    {
+        "merged": "/Users/johnbritto1/.gradle/daemon/8.9/com.mobile.sca.app-merged_res-81:/color_chip_selector.xml.flat",
+        "source": "/Users/johnbritto1/.gradle/daemon/8.9/com.mobile.sca.app-main-82:/color/chip_selector.xml"
+    },
+    {
+        "merged": "/Users/johnbritto1/.gradle/daemon/8.9/com.mobile.sca.app-merged_res-81:/layout_alarm_item_status.xml.flat",
+        "source": "/Users/johnbritto1/.gradle/daemon/8.9/com.mobile.sca.app-main-82:/layout/alarm_item_status.xml"
+    },
+    {
+        "merged": "/Users/johnbritto1/.gradle/daemon/8.9/com.mobile.sca.app-merged_res-81:/layout_activity_splash.xml.flat",
+        "source": "/Users/johnbritto1/.gradle/daemon/8.9/com.mobile.sca.app-main-82:/layout/activity_splash.xml"
+    },
+    {
+        "merged": "/Users/johnbritto1/.gradle/daemon/8.9/com.mobile.sca.app-merged_res-81:/drawable_bg_segment_selected.xml.flat",
+        "source": "/Users/johnbritto1/.gradle/daemon/8.9/com.mobile.sca.app-main-82:/drawable/bg_segment_selected.xml"
+    },
+    {
+        "merged": "/Users/johnbritto1/.gradle/daemon/8.9/com.mobile.sca.app-merged_res-81:/drawable_bg_completed.xml.flat",
+        "source": "/Users/johnbritto1/.gradle/daemon/8.9/com.mobile.sca.app-main-82:/drawable/bg_completed.xml"
+    },
+    {
+        "merged": "/Users/johnbritto1/.gradle/daemon/8.9/com.mobile.sca.app-merged_res-81:/drawable_cropped_circle_image.png.flat",
+        "source": "/Users/johnbritto1/.gradle/daemon/8.9/com.mobile.sca.app-main-82:/drawable/cropped_circle_image.png"
+    },
+    {
+        "merged": "/Users/johnbritto1/.gradle/daemon/8.9/com.mobile.sca.app-merged_res-81:/drawable_edit_bg.xml.flat",
+        "source": "/Users/johnbritto1/.gradle/daemon/8.9/com.mobile.sca.app-main-82:/drawable/edit_bg.xml"
+    },
+    {
+        "merged": "/Users/johnbritto1/.gradle/daemon/8.9/com.mobile.sca.app-merged_res-81:/drawable_setting.xml.flat",
+        "source": "/Users/johnbritto1/.gradle/daemon/8.9/com.mobile.sca.app-main-82:/drawable/setting.xml"
+    },
+    {
+        "merged": "/Users/johnbritto1/.gradle/daemon/8.9/com.mobile.sca.app-merged_res-81:/layout_onboarding.xml.flat",
+        "source": "/Users/johnbritto1/.gradle/daemon/8.9/com.mobile.sca.app-main-82:/layout/onboarding.xml"
+    },
+    {
+        "merged": "/Users/johnbritto1/.gradle/daemon/8.9/com.mobile.sca.app-merged_res-81:/layout_activity_database.xml.flat",
+        "source": "/Users/johnbritto1/.gradle/daemon/8.9/com.mobile.sca.app-main-82:/layout/activity_database.xml"
+    },
+    {
+        "merged": "/Users/johnbritto1/.gradle/daemon/8.9/com.mobile.sca.app-merged_res-81:/layout_item_otp.xml.flat",
+        "source": "/Users/johnbritto1/.gradle/daemon/8.9/com.mobile.sca.app-main-82:/layout/item_otp.xml"
+    },
+    {
+        "merged": "/Users/johnbritto1/.gradle/daemon/8.9/com.mobile.sca.app-merged_res-81:/drawable_error_circle.xml.flat",
+        "source": "/Users/johnbritto1/.gradle/daemon/8.9/com.mobile.sca.app-main-82:/drawable/error_circle.xml"
+    },
+    {
+        "merged": "/Users/johnbritto1/.gradle/daemon/8.9/com.mobile.sca.app-merged_res-81:/layout_item_alarm.xml.flat",
+        "source": "/Users/johnbritto1/.gradle/daemon/8.9/com.mobile.sca.app-main-82:/layout/item_alarm.xml"
+    },
+    {
+        "merged": "/Users/johnbritto1/.gradle/daemon/8.9/com.mobile.sca.app-merged_res-81:/layout_activity_alarm_list.xml.flat",
+        "source": "/Users/johnbritto1/.gradle/daemon/8.9/com.mobile.sca.app-main-82:/layout/activity_alarm_list.xml"
+    },
+    {
+        "merged": "/Users/johnbritto1/.gradle/daemon/8.9/com.mobile.sca.app-merged_res-81:/layout_activity_home.xml.flat",
+        "source": "/Users/johnbritto1/.gradle/daemon/8.9/com.mobile.sca.app-main-82:/layout/activity_home.xml"
+    },
+    {
+        "merged": "/Users/johnbritto1/.gradle/daemon/8.9/com.mobile.sca.app-merged_res-81:/drawable_bg_status_fired.xml.flat",
+        "source": "/Users/johnbritto1/.gradle/daemon/8.9/com.mobile.sca.app-main-82:/drawable/bg_status_fired.xml"
+    },
+    {
+        "merged": "/Users/johnbritto1/.gradle/daemon/8.9/com.mobile.sca.app-merged_res-81:/drawable_error_center_x.xml.flat",
+        "source": "/Users/johnbritto1/.gradle/daemon/8.9/com.mobile.sca.app-main-82:/drawable/error_center_x.xml"
+    },
+    {
+        "merged": "/Users/johnbritto1/.gradle/daemon/8.9/com.mobile.sca.app-merged_res-81:/drawable_bg_segment_unselected.xml.flat",
+        "source": "/Users/johnbritto1/.gradle/daemon/8.9/com.mobile.sca.app-main-82:/drawable/bg_segment_unselected.xml"
+    },
+    {
+        "merged": "/Users/johnbritto1/.gradle/daemon/8.9/com.mobile.sca.app-merged_res-81:/drawable_meet.xml.flat",
+        "source": "/Users/johnbritto1/.gradle/daemon/8.9/com.mobile.sca.app-main-82:/drawable/meet.xml"
+    },
+    {
+        "merged": "/Users/johnbritto1/.gradle/daemon/8.9/com.mobile.sca.app-merged_res-81:/drawable_bg_status_inactive.xml.flat",
+        "source": "/Users/johnbritto1/.gradle/daemon/8.9/com.mobile.sca.app-main-82:/drawable/bg_status_inactive.xml"
+    },
+    {
+        "merged": "/Users/johnbritto1/.gradle/daemon/8.9/com.mobile.sca.app-merged_res-81:/layout_row_alarm.xml.flat",
+        "source": "/Users/johnbritto1/.gradle/daemon/8.9/com.mobile.sca.app-main-82:/layout/row_alarm.xml"
+    },
+    {
+        "merged": "/Users/johnbritto1/.gradle/daemon/8.9/com.mobile.sca.app-merged_res-81:/layout_item.xml.flat",
+        "source": "/Users/johnbritto1/.gradle/daemon/8.9/com.mobile.sca.app-main-82:/layout/item.xml"
+    },
+    {
+        "merged": "/Users/johnbritto1/.gradle/daemon/8.9/com.mobile.sca.app-merged_res-81:/xml_accessibility_service_config.xml.flat",
+        "source": "/Users/johnbritto1/.gradle/daemon/8.9/com.mobile.sca.app-main-82:/xml/accessibility_service_config.xml"
+    },
+    {
+        "merged": "/Users/johnbritto1/.gradle/daemon/8.9/com.mobile.sca.app-merged_res-81:/layout_schdule.xml.flat",
+        "source": "/Users/johnbritto1/.gradle/daemon/8.9/com.mobile.sca.app-main-82:/layout/schdule.xml"
+    },
+    {
+        "merged": "/Users/johnbritto1/.gradle/daemon/8.9/com.mobile.sca.app-merged_res-81:/layout_welcome.xml.flat",
+        "source": "/Users/johnbritto1/.gradle/daemon/8.9/com.mobile.sca.app-main-82:/layout/welcome.xml"
+    },
+    {
+        "merged": "/Users/johnbritto1/.gradle/daemon/8.9/com.mobile.sca.app-merged_res-81:/layout_support_us.xml.flat",
+        "source": "/Users/johnbritto1/.gradle/daemon/8.9/com.mobile.sca.app-main-82:/layout/support_us.xml"
+    },
+    {
+        "merged": "/Users/johnbritto1/.gradle/daemon/8.9/com.mobile.sca.app-merged_res-81:/xml_data_extraction_rules.xml.flat",
+        "source": "/Users/johnbritto1/.gradle/daemon/8.9/com.mobile.sca.app-main-82:/xml/data_extraction_rules.xml"
+    },
+    {
+        "merged": "/Users/johnbritto1/.gradle/daemon/8.9/com.mobile.sca.app-merged_res-81:/layout_item_name.xml.flat",
+        "source": "/Users/johnbritto1/.gradle/daemon/8.9/com.mobile.sca.app-main-82:/layout/item_name.xml"
+    },
+    {
+        "merged": "/Users/johnbritto1/.gradle/daemon/8.9/com.mobile.sca.app-merged_res-81:/drawable_dot_background.xml.flat",
+        "source": "/Users/johnbritto1/.gradle/daemon/8.9/com.mobile.sca.app-main-82:/drawable/dot_background.xml"
+    },
+    {
+        "merged": "/Users/johnbritto1/.gradle/daemon/8.9/com.mobile.sca.app-merged_res-81:/layout_activity_login.xml.flat",
+        "source": "/Users/johnbritto1/.gradle/daemon/8.9/com.mobile.sca.app-main-82:/layout/activity_login.xml"
+    },
+    {
+        "merged": "/Users/johnbritto1/.gradle/daemon/8.9/com.mobile.sca.app-merged_res-81:/drawable_bg_cancelled.xml.flat",
+        "source": "/Users/johnbritto1/.gradle/daemon/8.9/com.mobile.sca.app-main-82:/drawable/bg_cancelled.xml"
+    },
+    {
+        "merged": "/Users/johnbritto1/.gradle/daemon/8.9/com.mobile.sca.app-merged_res-81:/drawable_bg_fired.xml.flat",
+        "source": "/Users/johnbritto1/.gradle/daemon/8.9/com.mobile.sca.app-main-82:/drawable/bg_fired.xml"
+    }
+]

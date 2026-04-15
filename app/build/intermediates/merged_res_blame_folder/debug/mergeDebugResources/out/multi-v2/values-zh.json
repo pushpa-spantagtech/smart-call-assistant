@@ -1,0 +1,19 @@
+{
+    "logs": [
+        {
+            "outputFile": "com.mobile.sca.app-mergeDebugResources-2:/values-zh/values-zh.xml",
+            "map": [
+                {
+                    "source": "C:\\Users\\Admin\\.gradle\\caches\\8.13\\transforms\\dcc51d71739d402d85dda33898637599\\transformed\\ucrop-2.2.6\\res\\values-zh\\values-zh.xml",
+                    "from": {
+                        "startLines": "2,3,4",
+                        "startColumns": "4,4,4",
+                        "startOffsets": "55,109,163",
+                        "endColumns": "53,53,46",
+                        "endOffsets": "104,158,205"
+                    }
+                }
+            ]
+        }
+    ]
+}
