@@ -1,3 +1,0 @@
-com.mobile.sca.test
-style WhiteBackgroundDialogTheme
-style WhiteBackgroundTheme

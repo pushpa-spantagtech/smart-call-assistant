@@ -1,6 +1,0 @@
-com.mobile.sca.test.app-androidTest-0 C:\SCA Updated Mobile App Source\SCA\app\build\generated\res\resValues\androidTest\debug
-com.mobile.sca.test.app-mergeDebugAndroidTestResources-1 C:\SCA Updated Mobile App Source\SCA\app\build\intermediates\incremental\debugAndroidTest\mergeDebugAndroidTestResources\merged.dir
-com.mobile.sca.test.app-mergeDebugAndroidTestResources-2 C:\SCA Updated Mobile App Source\SCA\app\build\intermediates\incremental\debugAndroidTest\mergeDebugAndroidTestResources\stripped.dir
-com.mobile.sca.test.app-debugAndroidTest-3 C:\SCA Updated Mobile App Source\SCA\app\build\intermediates\merged_res\debugAndroidTest\mergeDebugAndroidTestResources
-com.mobile.sca.test.app-annotation-experimental-1.4.0-4 C:\Users\Admin\.gradle\caches\8.13\transforms\39f6e429b8d7e396d26885df9f671a96\transformed\annotation-experimental-1.4.0\res
-com.mobile.sca.test.app-core-1.5.0-5 C:\Users\Admin\.gradle\caches\8.13\transforms\44609388892958e3d28d90b4da5e64a9\transformed\core-1.5.0\res
