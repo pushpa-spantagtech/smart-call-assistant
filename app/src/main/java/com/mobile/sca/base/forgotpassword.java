@@ -2,6 +2,7 @@ package com.mobile.sca.base;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Rect;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.text.Editable;
@@ -18,6 +19,7 @@ import android.widget.TextView;
 import androidx.activity.OnBackPressedCallback;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.widget.NestedScrollView;
 
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.android.material.textfield.TextInputEditText;
@@ -45,10 +47,14 @@ public class forgotpassword extends AppCompatActivity {
 
     private static final String SEND_OTP_URL =
             ApiEndpoints.SEND_OTP;
+
     private static final String VERIFY_OTP_URL =
             ApiEndpoints.VERIFY_OTP;
+
     private static final String RESET_PASSWORD_URL =
             ApiEndpoints.RESET_PASSWORD;
+
+    private NestedScrollView forgotPasswordScrollView;
 
     // Step sections
     private LinearLayout mobileNumberSection;
@@ -113,6 +119,9 @@ public class forgotpassword extends AppCompatActivity {
     }
 
     private void initializeViews() {
+
+        forgotPasswordScrollView =
+                findViewById(R.id.forgotPasswordScrollView);
 
         mobileNumberSection = findViewById(R.id.mobileNumberSection);
         otpSection = findViewById(R.id.otpSection);
@@ -290,6 +299,38 @@ public class forgotpassword extends AppCompatActivity {
 
     private void setupKeyboardBehavior() {
 
+        otpEditText.setOnFocusChangeListener(
+                (view, hasFocus) -> {
+
+                    if (!hasFocus) {
+                        return;
+                    }
+
+                    /*
+                     * Resize the visible area when the keyboard opens.
+                     * Then ask the NestedScrollView to reveal the complete
+                     * Verify OTP button. This works after switching from
+                     * the email step to the OTP step as well.
+                     */
+                    useNormalKeyboardMode();
+
+                    otpEditText.postDelayed(
+                            this::scrollOtpSectionToVerifyButton,
+                            250
+                    );
+
+                    otpEditText.postDelayed(
+                            this::scrollOtpSectionToVerifyButton,
+                            500
+                    );
+
+                    otpEditText.postDelayed(
+                            this::scrollOtpSectionToVerifyButton,
+                            750
+                    );
+                }
+        );
+
         emailEditText.setOnEditorActionListener(
                 (view, actionId, event) -> {
 
@@ -302,6 +343,8 @@ public class forgotpassword extends AppCompatActivity {
 
         otpEditText.addTextChangedListener(
                 new TextWatcher() {
+
+                    private boolean keyboardHidePosted = false;
 
                     @Override
                     public void beforeTextChanged(
@@ -321,12 +364,31 @@ public class forgotpassword extends AppCompatActivity {
                     ) {
 
                         if (text != null &&
-                                text.length() == 6) {
+                                text.length() == 6 &&
+                                !keyboardHidePosted) {
+
+                            keyboardHidePosted = true;
 
                             otpEditText.postDelayed(
-                                    () -> hideKeyboard(otpEditText),
-                                    100
+                                    () -> {
+
+                                        hideKeyboard(otpEditText);
+
+                                        /*
+                                         * Keep the current manual scroll position.
+                                         * ADJUST_NOTHING prevents the card from
+                                         * resizing or shaking when the keyboard closes.
+                                         */
+                                        otpEditText.clearFocus();
+                                        keyboardHidePosted = false;
+                                    },
+                                    120
                             );
+
+                        } else if (text == null ||
+                                text.length() < 6) {
+
+                            keyboardHidePosted = false;
                         }
                     }
 
@@ -335,6 +397,15 @@ public class forgotpassword extends AppCompatActivity {
                             Editable editable
                     ) {
                     }
+                }
+        );
+
+        otpEditText.setOnEditorActionListener(
+                (view, actionId, event) -> {
+
+                    hideKeyboard(otpEditText);
+                    otpEditText.clearFocus();
+                    return false;
                 }
         );
 
@@ -360,19 +431,53 @@ public class forgotpassword extends AppCompatActivity {
     private void useStableOtpKeyboardMode() {
 
         /*
-         * Keep the activity size unchanged and pan only enough to keep
-         * the focused OTP field above the keyboard. This avoids the
-         * resize shake while keeping the input visible.
+         * Kept for compatibility with the existing flow.
+         * OTP now uses normal resize so NestedScrollView can scroll.
          */
-        getWindow().setSoftInputMode(
-                WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN
-        );
+        useNormalKeyboardMode();
     }
 
     private void useNormalKeyboardMode() {
 
         getWindow().setSoftInputMode(
                 WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE
+        );
+    }
+
+    private void scrollOtpSectionToVerifyButton() {
+
+        if (forgotPasswordScrollView == null ||
+                verifyOtpButton == null ||
+                !otpEditText.hasFocus()) {
+
+            return;
+        }
+
+        Rect verifyButtonRect = new Rect();
+
+        verifyOtpButton.getDrawingRect(
+                verifyButtonRect
+        );
+
+        /*
+         * Add a little extra bottom space so the button does not touch
+         * the keyboard.
+         */
+        verifyButtonRect.bottom += dpToPx(16);
+
+        forgotPasswordScrollView.requestChildRectangleOnScreen(
+                verifyOtpButton,
+                verifyButtonRect,
+                true
+        );
+    }
+
+    private int dpToPx(int dp) {
+
+        return Math.round(
+                dp * getResources()
+                        .getDisplayMetrics()
+                        .density
         );
     }
 
@@ -1077,6 +1182,7 @@ public class forgotpassword extends AppCompatActivity {
     private void showEmailStep() {
 
         useNormalKeyboardMode();
+        forgotPasswordScrollView.scrollTo(0, 0);
 
         mobileNumberSection.setVisibility(View.VISIBLE);
         otpSection.setVisibility(View.GONE);
@@ -1111,6 +1217,7 @@ public class forgotpassword extends AppCompatActivity {
     private void showNewPasswordStep() {
 
         useNormalKeyboardMode();
+        forgotPasswordScrollView.scrollTo(0, 0);
 
         mobileNumberSection.setVisibility(View.GONE);
         otpSection.setVisibility(View.GONE);
@@ -1123,6 +1230,7 @@ public class forgotpassword extends AppCompatActivity {
     private void showConfirmPasswordStep() {
 
         useNormalKeyboardMode();
+        forgotPasswordScrollView.scrollTo(0, 0);
 
         mobileNumberSection.setVisibility(View.GONE);
         otpSection.setVisibility(View.GONE);

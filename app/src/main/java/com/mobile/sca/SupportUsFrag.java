@@ -37,11 +37,19 @@ public class SupportUsFrag extends Fragment {
                 false
         );
 
-        TextView tvHelpFaq = root.findViewById(R.id.tvHelpFaq);
-        TextView tvLogout = root.findViewById(R.id.tvLogout);
+        TextView tvHelpFaq =
+                root.findViewById(R.id.tvHelpFaq);
 
-        tvHelpFaq.setOnClickListener(view -> openHelpFaqPage());
-        tvLogout.setOnClickListener(view -> showLogoutDialog());
+        TextView tvLogout =
+                root.findViewById(R.id.tvLogout);
+
+        tvHelpFaq.setOnClickListener(
+                view -> openHelpFaqPage()
+        );
+
+        tvLogout.setOnClickListener(
+                view -> showLogoutDialog()
+        );
 
         return root;
     }
@@ -62,9 +70,9 @@ public class SupportUsFrag extends Fragment {
 
     private void showLogoutDialog() {
 
-        if (!isAdded() ||
-                getContext() == null ||
-                getActivity() == null) {
+        if (!isAdded()
+                || getContext() == null
+                || getActivity() == null) {
 
             return;
         }
@@ -79,11 +87,13 @@ public class SupportUsFrag extends Fragment {
                 .setCancelable(true)
                 .setNegativeButton(
                         R.string.cancel,
-                        (dialog, which) -> dialog.dismiss()
+                        (dialog, which) ->
+                                dialog.dismiss()
                 )
                 .setPositiveButton(
                         R.string.logout,
                         (dialog, which) -> {
+
                             dialog.dismiss();
                             performLogout();
                         }
@@ -93,9 +103,9 @@ public class SupportUsFrag extends Fragment {
 
     private void performLogout() {
 
-        if (!isAdded() ||
-                getContext() == null ||
-                getActivity() == null) {
+        if (!isAdded()
+                || getContext() == null
+                || getActivity() == null) {
 
             return;
         }
@@ -118,8 +128,8 @@ public class SupportUsFrag extends Fragment {
         );
 
         intent.setFlags(
-                Intent.FLAG_ACTIVITY_NEW_TASK |
-                        Intent.FLAG_ACTIVITY_CLEAR_TASK
+                Intent.FLAG_ACTIVITY_NEW_TASK
+                        | Intent.FLAG_ACTIVITY_CLEAR_TASK
         );
 
         startActivity(intent);

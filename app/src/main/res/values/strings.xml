@@ -38,7 +38,6 @@
     <string name="privacy_terms_text">I accept the <b><u><a href="https://google.com">Privacy Policy</a></u></b> and <b><u><a href="https://youtube.com">Terms &amp; Conditions</a></u></b></string>
     <string name="privacy_url">https://sites.google.com/view/dndddd-cvbvcbvcbvcbcvbcv/terms-conditions</string>
     <string name="terms_url">https://sites.google.com/view/dndddd-cvbvcbvcbvcbcvbcv/terms-conditions</string>
-    <string name="logout">Logout</string>
     <string name="dashboard">DashBoard</string>
     <string name="as_dndddd_manpower_html">• As dndddd Manpower Service (PVT) LTD takes full responsibility for providing skilled workers and service professionals.</string>
     <string name="as_dndddd_manpower_html1">• We serve various industries, ensuring every task is completed efficiently and to the highest standard.</string>
@@ -66,7 +65,6 @@
     <string name="sign_in_title">Sign in to your account</string>
     <string name="sign_in_subtitle">Enter your phone number and password to continue</string>
     <string name="dont_have_account">Don\'t have an account?</string>
-    <string name="scheduler_logo">Scheduler logo</string>
     <string name="create_account">Create your account</string>
     <string name="full_name">Full Name</string>
     <string name="confirm_password">Confirm Password</string>
@@ -117,9 +115,7 @@
     <string name="back_to_login">Back to Login</string>
 
     <!--  Support and FAQ  -->
-    <string name="support_title">Support</string>
     <string name="support_section_title">Support &amp; Help</string>
-    <string name="help_faq_menu">How to Use / Help &amp; FAQ</string>
     <string name="support_footer">Find answers and learn how to use the Scheduler application.</string>
     <string name="help_faq_title">Help &amp; FAQ</string>
     <string name="help_intro_title">How to use the application</string>
@@ -138,11 +134,8 @@
     <string name="faq_notifications_answer">Check that all required permissions are enabled, battery optimization is disabled for this app and the schedule date and time are correct.</string>
     <string name="faq_logout_title">How do I log out?</string>
     <string name="faq_logout_answer">Open the Support tab, tap Logout and confirm. You will return to the Login page.</string>
-    <string name="logout_dialog_title">Log out?</string>
-    <string name="logout_dialog_message">Are you sure you want to log out of your account?</string>
     <string name="cancel">Cancel</string>
     <string name="email_address">Email Address</string>
-
 
     <string name="enter_email_address">Enter Email Address</string>
     <string name="send_email_otp_description">We will send an OTP to your registered email address.</string>
@@ -150,5 +143,15 @@
     <string name="email_otp_sent_description">An OTP was sent to your email address.</string>
     <string name="otp_sent_message">We sent a 6-digit OTP to %1$s</string>
     <string name="otp_hint_compact">Enter 6-digit OTP</string>
+
+    <string name="support_title">Support</string>
+    <string name="need_help_title">Need Help?</string>
+    <string name="need_help_description">Learn how to use the app and find answers to common questions.</string>
+    <string name="help_faq_menu">Help &amp; FAQ</string>
+    <string name="logout">Log Out</string>
+    <string name="logout_dialog_title">Log out?</string>
+    <string name="logout_dialog_message">Are you sure you want to log out of your account?</string>
+    <string name="scheduler_logo">Scheduler application logo</string>
+    <string name="back_to_previous_screen">Back</string>
 
 </resources>

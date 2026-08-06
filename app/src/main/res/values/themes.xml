@@ -1,26 +1,39 @@
 <?xml version="1.0" encoding="utf-8"?>
+
 <resources>
 
     <style name="Theme.dnd" parent="android:Theme.Material.Light.NoActionBar" />
 
     <style name="AppTheme" parent="Theme.MaterialComponents.Light.NoActionBar">
 
-        <!-- Primary Colors -->
         <item name="colorPrimary">@color/purple_700</item>
         <item name="colorPrimaryVariant">@color/purple_700</item>
         <item name="colorOnPrimary">@color/white</item>
 
-        <!-- Status Bar -->
+        <!-- Existing global white status bar -->
         <item name="colorPrimaryDark">@android:color/white</item>
         <item name="android:statusBarColor">@android:color/white</item>
         <item name="android:windowLightStatusBar">true</item>
 
-        <!-- Navigation Bar -->
         <item name="android:navigationBarColor">@android:color/white</item>
-
-        <!-- System Windows -->
         <item name="android:windowDrawsSystemBarBackgrounds">true</item>
         <item name="android:fitsSystemWindows">true</item>
+
+    </style>
+
+    <!-- Used only by HelpFaqActivity -->
+    <style name="HelpFaqTheme" parent="Theme.MaterialComponents.Light.NoActionBar">
+
+        <item name="colorPrimary">@color/purple_700</item>
+        <item name="colorPrimaryVariant">@color/purple_700</item>
+        <item name="colorOnPrimary">@color/white</item>
+
+        <item name="colorPrimaryDark">@color/purple_700</item>
+        <item name="android:statusBarColor">@color/purple_700</item>
+        <item name="android:windowLightStatusBar">false</item>
+
+        <item name="android:navigationBarColor">@android:color/white</item>
+        <item name="android:windowDrawsSystemBarBackgrounds">true</item>
 
     </style>
 

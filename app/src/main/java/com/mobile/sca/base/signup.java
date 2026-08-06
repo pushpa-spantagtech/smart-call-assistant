@@ -1,5 +1,6 @@
 package com.mobile.sca.base;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
@@ -8,7 +9,9 @@ import android.text.TextWatcher;
 import android.text.method.HideReturnsTransformationMethod;
 import android.text.method.PasswordTransformationMethod;
 import android.util.Patterns;
+import android.view.View;
 import android.view.WindowManager;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.TextView;
 
@@ -31,6 +34,7 @@ import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
+import java.util.Locale;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
@@ -350,7 +354,13 @@ public class signup extends AppCompatActivity {
 
         String fullName = getValue(nameEditText);
         String phone = getValue(phoneEditText);
-        String email = getValue(emailEditText);
+
+        String email = getValue(emailEditText)
+                .toLowerCase(Locale.ROOT);
+
+        emailEditText.setText(email);
+        emailEditText.setSelection(email.length());
+
         String password = getValue(passwordEditText);
         String confirmPassword = getValue(confirmPasswordEditText);
 
@@ -446,13 +456,118 @@ public class signup extends AppCompatActivity {
             return;
         }
 
-        callSignupApi(
+        hideKeyboard(confirmPasswordEditText);
+
+        showEmailConfirmationDialog(
                 fullName,
                 phone,
                 email,
                 password,
                 confirmPassword
         );
+    }
+
+    private void showEmailConfirmationDialog(
+            String fullName,
+            String phone,
+            String email,
+            String password,
+            String confirmPassword
+    ) {
+
+        if (isFinishing() || isDestroyed()) {
+            return;
+        }
+
+        new MaterialAlertDialogBuilder(
+                signup.this,
+                R.style.AppMaterialDialogTheme
+        )
+                .setIcon(R.drawable.ic_email)
+                .setTitle("Confirm Email Address")
+                .setMessage(
+                        "Password reset OTP will be sent to:\n\n" +
+                                email +
+                                "\n\nPlease make sure this email address is correct."
+                )
+                .setCancelable(true)
+                .setNegativeButton(
+                        "Edit Email",
+                        (dialog, which) -> {
+
+                            dialog.dismiss();
+
+                            emailEditText.requestFocus();
+
+                            emailEditText.postDelayed(
+                                    () -> {
+
+                                        emailEditText.setSelection(
+                                                emailEditText.length()
+                                        );
+
+                                        showKeyboard(emailEditText);
+                                    },
+                                    150
+                            );
+                        }
+                )
+                .setPositiveButton(
+                        "Confirm & Register",
+                        (dialog, which) -> {
+
+                            dialog.dismiss();
+
+                            callSignupApi(
+                                    fullName,
+                                    phone,
+                                    email,
+                                    password,
+                                    confirmPassword
+                            );
+                        }
+                )
+                .show();
+    }
+
+    private void hideKeyboard(View view) {
+
+        if (view == null) {
+            return;
+        }
+
+        InputMethodManager inputMethodManager =
+                (InputMethodManager) getSystemService(
+                        Context.INPUT_METHOD_SERVICE
+                );
+
+        if (inputMethodManager != null) {
+
+            inputMethodManager.hideSoftInputFromWindow(
+                    view.getWindowToken(),
+                    0
+            );
+        }
+    }
+
+    private void showKeyboard(View view) {
+
+        if (view == null) {
+            return;
+        }
+
+        InputMethodManager inputMethodManager =
+                (InputMethodManager) getSystemService(
+                        Context.INPUT_METHOD_SERVICE
+                );
+
+        if (inputMethodManager != null) {
+
+            inputMethodManager.showSoftInput(
+                    view,
+                    InputMethodManager.SHOW_IMPLICIT
+            );
+        }
     }
 
     private String getPasswordValidationError(String password) {
