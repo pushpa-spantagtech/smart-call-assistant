@@ -16,9 +16,9 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.view.WindowCompat;
 
+import com.google.android.material.checkbox.MaterialCheckBox;
 import com.mobile.sca.R;
 import com.mobile.sca.home;
-import com.google.android.material.checkbox.MaterialCheckBox;
 
 public class permissioncheck extends AppCompatActivity {
 
@@ -59,9 +59,9 @@ public class permissioncheck extends AppCompatActivity {
                         i.setData(Uri.parse("package:" + getPackageName()));
                         startActivity(i);
                     } else if (nm != null && !nm.isNotificationPolicyAccessGranted()) {
-                            Toast.makeText(getApplicationContext(), "Find My Scheduler -> Allow", Toast.LENGTH_SHORT).show();
-                            startActivity(
-                                    new Intent(Settings.ACTION_NOTIFICATION_POLICY_ACCESS_SETTINGS));
+                        Toast.makeText(getApplicationContext(), "Find My Scheduler -> Allow", Toast.LENGTH_SHORT).show();
+                        startActivity(
+                                new Intent(Settings.ACTION_NOTIFICATION_POLICY_ACCESS_SETTINGS));
                     } else {
                         SharedPreferences pref = getSharedPreferences("app", MODE_PRIVATE);
                         pref.edit().putBoolean("permission", true).commit();

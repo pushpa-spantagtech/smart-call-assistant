@@ -12,6 +12,7 @@ import android.widget.ImageView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager2.widget.ViewPager2;
+
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
 
@@ -29,7 +30,7 @@ public class setupActivity extends AppCompatActivity implements OnboardingAction
     @Override
     public void onPhoneContinueClicked(String phoneNumber, int position) {
         Log.d("PHONE", phoneNumber);
-        if(position == 3) {
+        if (position == 3) {
             SharedPreferences pref = getSharedPreferences("app", MODE_PRIVATE);
             pref.edit().putBoolean("home", true).commit();
             startActivity(new Intent(this, home.class));
@@ -38,6 +39,7 @@ public class setupActivity extends AppCompatActivity implements OnboardingAction
             viewPager.setCurrentItem(position, true);
         }
     }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -49,7 +51,7 @@ public class setupActivity extends AppCompatActivity implements OnboardingAction
         dotsIndicator = findViewById(R.id.dotsIndicator);
         btnBack = findViewById(R.id.btnBack);
 
-        if (pref.getBoolean("home", false) == true){
+        if (pref.getBoolean("home", false) == true) {
             startActivity(new Intent(this, home.class));
             finish();
         } else {

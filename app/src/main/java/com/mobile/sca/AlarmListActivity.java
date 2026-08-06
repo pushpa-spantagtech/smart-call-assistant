@@ -6,8 +6,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.mobile.sca.base.AlarmAdapter;
-
 import java.util.ArrayList;
 import java.util.List;
 

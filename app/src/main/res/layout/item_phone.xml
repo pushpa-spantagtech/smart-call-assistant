@@ -11,14 +11,14 @@
         android:textSize="22sp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textStyle="bold"/>
+        android:textStyle="bold" />
 
     <TextView
         android:text="We'll send you a verification code"
         android:layout_marginTop="6dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textColor="#777"/>
+        android:textColor="#777" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -36,7 +36,7 @@
             android:layout_height="wrap_content"
             app:ccp_showFlag="true"
             app:ccp_showNameCode="false"
-            app:ccp_showPhoneCode="true"/>
+            app:ccp_showPhoneCode="true" />
 
         <EditText
             android:id="@+id/etPhone"
@@ -46,7 +46,7 @@
             android:hint="Phone number"
             android:inputType="phone"
             android:background="@null"
-            android:paddingStart="12dp"/>
+            android:paddingStart="12dp" />
     </LinearLayout>
 
 
@@ -56,6 +56,6 @@
         android:text="Continue"
         android:id="@+id/continuebutton"
         android:layout_marginTop="32dp"
-        android:textColor="@android:color/white"/>
+        android:textColor="@android:color/white" />
 
 </LinearLayout>

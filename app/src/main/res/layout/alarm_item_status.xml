@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.google.android.material.card.MaterialCardView
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -24,7 +23,7 @@
             android:text="Alarm Title"
             android:textSize="18sp"
             android:textStyle="bold"
-            android:textColor="#212121"/>
+            android:textColor="#212121" />
 
         <!-- Time -->
         <TextView
@@ -34,7 +33,7 @@
             android:text="10:43 PM"
             android:textSize="14sp"
             android:textColor="#616161"
-            android:layout_marginTop="4dp"/>
+            android:layout_marginTop="4dp" />
 
         <!-- Days -->
         <TextView
@@ -44,14 +43,14 @@
             android:text="Mon, Tue, Wed"
             android:textSize="13sp"
             android:textColor="#757575"
-            android:layout_marginTop="4dp"/>
+            android:layout_marginTop="4dp" />
 
         <!-- Divider -->
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:layout_marginVertical="8dp"
-            android:background="#E0E0E0"/>
+            android:background="#E0E0E0" />
 
         <!-- Status badge -->
         <TextView
@@ -64,7 +63,7 @@
             android:textColor="#FFFFFF"
             android:paddingHorizontal="12dp"
             android:paddingVertical="6dp"
-            android:background="@drawable/bg_status_active"/>
+            android:background="@drawable/bg_status_active" />
     </LinearLayout>
 
 </com.google.android.material.card.MaterialCardView>

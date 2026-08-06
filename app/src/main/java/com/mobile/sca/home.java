@@ -4,7 +4,6 @@ import android.Manifest;
 import android.app.AlarmManager;
 import android.app.AlertDialog;
 import android.app.NotificationManager;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.net.Uri;
@@ -13,15 +12,14 @@ import android.os.Bundle;
 import android.provider.Settings;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.core.view.WindowCompat;
 import androidx.fragment.app.Fragment;
 
-import com.mobile.sca.base.AlwaysOnService;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.mobile.sca.base.AlwaysOnService;
 
 public class home extends AppCompatActivity {
 

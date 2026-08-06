@@ -2,7 +2,6 @@
     <string name="app_name">......</string>
     <string name="hint_email">Username</string>
     <string name="privacy_policy"><![CDATA[Privacy Policy]]></string>
-    <string name="register"><b><u>Sign Up</u></b></string>
     <string name="signIn"><b><u>Sign In</u></b></string>
     <string name="personal">*** Personal ***</string>
     <string name="address_proof">Address Proof</string>
@@ -61,4 +60,95 @@
     <string name="delete">Delete</string>
     <string name="add_scheduler_button">Add Scheduler</string>
     <string name="scedule_now_button">Scedule Now</string>
+    <string name="phone_number">Phone Number</string>
+    <string name="forgot_password">Forgot Password?</string>
+    <string name="sign_up">Sign Up</string>
+    <string name="sign_in_title">Sign in to your account</string>
+    <string name="sign_in_subtitle">Enter your phone number and password to continue</string>
+    <string name="dont_have_account">Don\'t have an account?</string>
+    <string name="scheduler_logo">Scheduler logo</string>
+    <string name="create_account">Create your account</string>
+    <string name="full_name">Full Name</string>
+    <string name="confirm_password">Confirm Password</string>
+    <string name="register">Register</string>
+    <string name="already_have_account">Already have an account?</string>
+    <!--    <string name="otp_sent_message">We sent a 6-digit OTP to %1$s</string>-->
+    <string name="resend_timer">Resend OTP in %1$d seconds</string>
+    <string name="logging_in">Logging in...</string>
+    <string name="registering">Registering...</string>
+    <!-- Forgot password screen -->
+    <string name="forgot_password_title">Forgot Password</string>
+    <string name="forgot_password_subtitle">
+    Verify your email address and create a new password</string>
+    <!-- Step indicators -->
+    <string name="step_one">1</string>
+    <string name="step_two">2</string>
+    <string name="step_three">3</string>
+    <string name="step_four">4</string>
+
+    <!--    &lt;!&ndash; Mobile number step &ndash;&gt;-->
+    <!--        <string name="enter_mobile_number">Enter Mobile Number</string>-->
+    <!--        <string name="send_otp_description">We will send an OTP to your registered mobile number.</string>-->
+    <!--        <string name="mobile_number_hint">Mobile Number</string>-->
+    <string name="send_otp">Send OTP</string>
+
+    <!-- OTP step -->
+    <string name="otp_verification">OTP Verification</string>
+    <!--        <string name="otp_sent_description">An OTP was sent to your mobile number.</string>-->
+    <string name="otp_hint">Enter 6-digit OTP</string>
+    <string name="verify_otp">Verify OTP</string>
+    <string name="resend_otp_default">Resend OTP in 60 seconds</string>
+    <string name="resend_otp">Resend OTP</string>
+
+    <!-- New password step -->
+    <string name="create_new_password">Create New Password</string>
+    <string name="create_password_description">Create a secure password for your account.</string>
+    <string name="new_password_hint">New Password</string>
+    <string name="password_rule">Use at least 8 characters with uppercase, lowercase, number and special character.</string>
+    <string name="continue_button">Continue</string>
+
+    <!-- Confirm password step -->
+    <string name="confirm_password_title">Confirm Password</string>
+    <string name="confirm_password_description">Re-enter your new password to confirm it.</string>
+    <string name="confirm_new_password_hint">Confirm New Password</string>
+    <string name="reset_password">Reset Password</string>
+
+    <!-- Navigation -->
+    <string name="back_to_login">Back to Login</string>
+
+    <!--  Support and FAQ  -->
+    <string name="support_title">Support</string>
+    <string name="support_section_title">Support &amp; Help</string>
+    <string name="help_faq_menu">How to Use / Help &amp; FAQ</string>
+    <string name="support_footer">Find answers and learn how to use the Scheduler application.</string>
+    <string name="help_faq_title">Help &amp; FAQ</string>
+    <string name="help_intro_title">How to use the application</string>
+    <string name="help_intro_text">Follow these steps to create your account, sign in, allow the required permissions and create schedules.</string>
+    <string name="faq_login_title">How do I log in?</string>
+    <string name="faq_login_answer">Open the Login page, enter your registered 10-digit mobile number and password, then tap Login.</string>
+    <string name="faq_signup_title">How do I create an account?</string>
+    <string name="faq_signup_answer">On the Login page, tap Sign Up. Enter your full name, mobile number, email address, password and confirm password, then tap Register.</string>
+    <string name="faq_forgot_title">What should I do if I forget my password?</string>
+    <string name="faq_forgot_answer">Tap Forgot Password on the Login page. Enter your registered email address, verify the OTP, create a new password and confirm it.</string>
+    <string name="faq_permissions_title">Why does the app request permissions?</string>
+    <string name="faq_permissions_answer">The application needs notification, Do Not Disturb, exact alarm and battery-related permissions so schedules can run correctly. Allow the requested permissions when prompted.</string>
+    <string name="faq_schedule_title">How do I create a schedule?</string>
+    <string name="faq_schedule_answer">Open the Schedule tab, choose the required date and time, configure the schedule options and save it. Review saved schedules in the schedule list.</string>
+    <string name="faq_notifications_title">Why did my schedule not run?</string>
+    <string name="faq_notifications_answer">Check that all required permissions are enabled, battery optimization is disabled for this app and the schedule date and time are correct.</string>
+    <string name="faq_logout_title">How do I log out?</string>
+    <string name="faq_logout_answer">Open the Support tab, tap Logout and confirm. You will return to the Login page.</string>
+    <string name="logout_dialog_title">Log out?</string>
+    <string name="logout_dialog_message">Are you sure you want to log out of your account?</string>
+    <string name="cancel">Cancel</string>
+    <string name="email_address">Email Address</string>
+
+
+    <string name="enter_email_address">Enter Email Address</string>
+    <string name="send_email_otp_description">We will send an OTP to your registered email address.</string>
+    <string name="email_address_hint">Email Address</string>
+    <string name="email_otp_sent_description">An OTP was sent to your email address.</string>
+    <string name="otp_sent_message">We sent a 6-digit OTP to %1$s</string>
+    <string name="otp_hint_compact">Enter 6-digit OTP</string>
+
 </resources>

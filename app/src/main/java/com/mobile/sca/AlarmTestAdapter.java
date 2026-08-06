@@ -13,8 +13,6 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.mobile.sca.base.TimeUtils;
-
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.List;
@@ -29,7 +27,7 @@ public class AlarmTestAdapter extends RecyclerView.Adapter<AlarmTestAdapter.View
         this.context = context;
         this.list = list;
 
-        Log.e("Testing", ""+list);
+        Log.e("Testing", "" + list);
     }
 
     @NonNull
@@ -142,13 +140,13 @@ public class AlarmTestAdapter extends RecyclerView.Adapter<AlarmTestAdapter.View
 
             if (cal.after(endCal)) {
                 Log.e("AlarmStatus", "Alarm NOT scheduled: " + alarm.title + " on " + day);
-                notScheduledCount ++;
+                notScheduledCount++;
             } else if (cal.before(now)) {
                 Log.e("AlarmStatus", "Alarm already fired: " + alarm.title + " on " + day + " at " + sdf.format(cal.getTime()));
                 firedCount++;
             } else {
                 Log.e("AlarmStatus", "Alarm scheduled: " + alarm.title + " on " + day + " at " + sdf.format(cal.getTime()));
-                scheduledCount ++;
+                scheduledCount++;
             }
         }
         return scheduledCount > 0 ? "ACTIVE" : (notScheduledCount > 0 && firedCount == 0) ? "INACTIVE" : "FIRED";

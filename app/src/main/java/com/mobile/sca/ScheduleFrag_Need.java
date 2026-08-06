@@ -23,17 +23,14 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.mobile.sca.base.AlarmReceiver;
 import com.mobile.sca.base.AlwaysOnService;
 
-import java.util.ArrayList;
 import java.util.Locale;
 
 public class ScheduleFrag_Need extends Fragment {
-
 
 
     private TextView onLabel, offLabel;
@@ -110,21 +107,21 @@ public class ScheduleFrag_Need extends Fragment {
                 Toast.makeText(getActivity(), "Off time must be after On time", Toast.LENGTH_SHORT).show();
                 return;
             }
-           // adapter.add(new com.mobile.sca.base.SimpleSchedule(onHour, onMinute, offHour, offMinute));
+            // adapter.add(new com.mobile.sca.base.SimpleSchedule(onHour, onMinute, offHour, offMinute));
 
 
             long onTimeMillis = com.mobile.sca.base.TimeUtils.nextTimeMillis(onHour, onMinute);
             long offTimeMillis = com.mobile.sca.base.TimeUtils.nextTimeMillis(offHour, offMinute);
 
-            Log.e("OnTIme1", ""+onHour);
-            Log.e("OFFTIme1", ""+onMinute);
+            Log.e("OnTIme1", "" + onHour);
+            Log.e("OFFTIme1", "" + onMinute);
 
             AlarmManager alarmManager = (AlarmManager) getActivity().getSystemService(ALARM_SERVICE);
-            Log.e("OnTIme", ""+onTimeMillis);
-            Log.e("OFFTIme", ""+offTimeMillis);
+            Log.e("OnTIme", "" + onTimeMillis);
+            Log.e("OFFTIme", "" + offTimeMillis);
 
             int count = adapter.getItemCount();
-            Log.e("Count", ""+count);
+            Log.e("Count", "" + count);
 // ON alarm
             Intent onIntent = new Intent(getActivity(), AlarmReceiver.class);
             onIntent.putExtra("TURN_ON", true);
@@ -147,6 +144,7 @@ public class ScheduleFrag_Need extends Fragment {
 
         return root;
     }
+
     private void updateOnLabels(int hour, int minute) {
         int displayHour = hour % 12;
         if (displayHour == 0) displayHour = 12;
@@ -184,6 +182,7 @@ public class ScheduleFrag_Need extends Fragment {
         int offMin = fh * 60 + fm;
         return offMin > onMin;
     }
+
     private void startAlwaysOnService() {
         //Toast.makeText(getActivity(), "Start Service", Toast.LENGTH_SHORT).show();
         Intent svc = new Intent(getActivity(), AlwaysOnService.class);

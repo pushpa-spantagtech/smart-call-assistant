@@ -3,7 +3,6 @@ package com.mobile.sca;
 import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.telecom.TelecomManager;
@@ -33,6 +32,7 @@ public class Database_activity extends AppCompatActivity {
     String API_URL = "https://script.google.com/macros/s/AKfycbxWeNsCF6sLEDOkuKVNg9UuQ-6x40JeKsSHv33LMQxjCMb_gATYXoqzdnlIX9qN8PPg3g/exec";
 
     public static Database_activity instance;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -109,7 +109,7 @@ public class Database_activity extends AppCompatActivity {
 //                                "Server: " + response,
 //                                Toast.LENGTH_LONG).show()
 //                );
-                Log.e("Server", "Response: "+response);
+                Log.e("Server", "Response: " + response);
 
             } catch (Exception e) {
 //                e.printStackTrace();
@@ -176,7 +176,7 @@ public class Database_activity extends AppCompatActivity {
 //                                "Server: " + response,
 //                                Toast.LENGTH_LONG).show()
 //                );
-                Log.e("Server", "Response: "+response);
+                Log.e("Server", "Response: " + response);
 
             } catch (Exception e) {
 //                e.printStackTrace();

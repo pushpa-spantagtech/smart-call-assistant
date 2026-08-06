@@ -1,7 +1,5 @@
 package com.mobile.sca.base;
 
-import static android.view.View.VISIBLE;
-
 import android.annotation.SuppressLint;
 import android.app.AlarmManager;
 import android.app.PendingIntent;
@@ -9,22 +7,13 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.os.Build;
 import android.util.Log;
 import android.widget.Toast;
 
-import androidx.core.content.ContextCompat;
-
-import com.mobile.sca.AlarmDatabase;
 import com.mobile.sca.AlarmEntity;
-import com.mobile.sca.home;
-import com.google.android.material.chip.Chip;
 
-import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.HashSet;
-import java.util.List;
-import java.util.Locale;
 import java.util.Set;
 
 public class BootCompletedReceiver extends BroadcastReceiver {
@@ -50,28 +39,29 @@ public class BootCompletedReceiver extends BroadcastReceiver {
 //            }
         }
     }
+
     private void saveAlarm(AlarmEntity alarm) {
 
-        if(alarm.endday != 0){
-             //scheduleWeeklyAlarmsWithDate(context, alarm);
-             TimeUtils.scheduleWeeklyAlarmsWithDate(context, alarm);
-        }
-        else if (alarm.days.isEmpty()) {
-            if(alarm.title.contains("ACTIVE")) {
+        if (alarm.endday != 0) {
+            //scheduleWeeklyAlarmsWithDate(context, alarm);
+            TimeUtils.scheduleWeeklyAlarmsWithDate(context, alarm);
+        } else if (alarm.days.isEmpty()) {
+            if (alarm.title.contains("ACTIVE")) {
                 TimeUtils.scheduleOneTimeAlarm(context, alarm);
             }
         }
     }
+
     @SuppressLint("ScheduleExactAlarm")
     public static void scheduleWeeklyAlarmsWithDate(Context context, AlarmEntity alarm) {
         SharedPreferences prefs =
-                context.getSharedPreferences(""+alarm.id, Context.MODE_PRIVATE);
+                context.getSharedPreferences("" + alarm.id, Context.MODE_PRIVATE);
 
         Set<String> savedSet =
                 prefs.getStringSet("KEY_REQUEST_CODES", new HashSet<>());
         for (String item : savedSet) {
             Log.e("AdapterItem", item);
-            if(item.contains("ACTIVE")) {
+            if (item.contains("ACTIVE")) {
 
                 Calendar startCal = Calendar.getInstance();
                 startCal.set(Calendar.YEAR, alarm.year);

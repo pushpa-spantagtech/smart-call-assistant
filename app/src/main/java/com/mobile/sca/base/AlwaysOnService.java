@@ -37,7 +37,7 @@ public class AlwaysOnService extends Service {
     @Override
     public void onCreate() {
         super.onCreate();
-        Log.e("RunningCreate","yes");
+        Log.e("RunningCreate", "yes");
         ensureChannel();
     }
 
@@ -55,7 +55,7 @@ public class AlwaysOnService extends Service {
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
-        Log.e("Running","yes");
+        Log.e("Running", "yes");
         if (intent != null && intent.hasExtra("title")) {
             String title = intent.getStringExtra("title");
             String message = intent.getStringExtra("message");
@@ -102,6 +102,7 @@ public class AlwaysOnService extends Service {
             if (nm != null) nm.createNotificationChannel(ch);
         }
     }
+
     private void updateNotification(String title, String message) {
         Notification updatedNotification =
                 new NotificationCompat.Builder(this, CHANNEL_ID)

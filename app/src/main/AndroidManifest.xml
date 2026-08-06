@@ -5,16 +5,16 @@
     <uses-feature
         android:name="android.hardware.telephony"
         android:required="false" />
-    <uses-permission android:name="android.permission.ACCESS_NOTIFICATION_POLICY" /> <!-- Android 13+ notifications runtime permission -->
-    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" /> <!-- Foreground service base permission -->
-    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" /> <!-- Foreground service type-specific permission for Android 14+ -->
-    <uses-permission android:name="android.permission.FOREGROUND_SERVICE_DATA_SYNC" /> <!-- Keep service alive across device boot -->
+
+    <uses-permission android:name="android.permission.ACCESS_NOTIFICATION_POLICY" />
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE_DATA_SYNC" />
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
-    <uses-permission android:name="android.permission.SCHEDULE_EXACT_ALARM" /> <!-- Optional: keep CPU on briefly (low-level), and request Doze exemption (user must approve) -->
+    <uses-permission android:name="android.permission.SCHEDULE_EXACT_ALARM" />
     <uses-permission android:name="android.permission.WAKE_LOCK" />
     <uses-permission android:name="android.permission.REQUEST_IGNORE_BATTERY_OPTIMIZATIONS" />
-    <uses-permission android:name="android.permission.INTERNET"/>
-    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"/>
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:allowBackup="true"
@@ -23,11 +23,15 @@
         android:label="Scheduler"
         android:roundIcon="@drawable/dnd_app_icon"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
+        android:theme="@style/AppTheme"
+        tools:targetApi="31">
+
         <activity
             android:name=".SplashActivity"
             android:exported="true"
+            android:screenOrientation="portrait"
             android:theme="@style/AppTheme">
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -35,56 +39,77 @@
             </intent-filter>
 
         </activity>
+
         <activity
             android:name=".setupActivity"
-            android:exported="true"
-            android:theme="@style/AppTheme">
-        </activity>
+            android:exported="false"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme" />
+
         <activity
             android:name=".home"
-            android:exported="true"
+            android:exported="false"
             android:screenOrientation="portrait" />
 
         <activity
             android:name=".AlarmListActivity"
-            android:exported="true"
+            android:exported="false"
+            android:screenOrientation="portrait" />
+
+
+        <activity
+            android:name=".HelpFaqActivity"
+            android:exported="false"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".base.signup"
+            android:exported="false"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".base.forgotpassword"
+            android:exported="false"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".base.login"
+            android:exported="false"
             android:screenOrientation="portrait" />
 
         <activity
             android:name=".base.welcome"
-            android:exported="true"
-            android:screenOrientation="portrait" >
-
-        </activity>
+            android:exported="false"
+            android:screenOrientation="portrait" />
 
         <activity
             android:name=".base.permissioncheck"
-            android:exported="true"
-            android:screenOrientation="portrait" >
+            android:exported="false"
+            android:screenOrientation="portrait" />
 
-        </activity>
         <receiver
             android:name=".base.AlarmReceiver"
-            android:exported="true" />
+            android:exported="false" />
+
         <receiver
             android:name=".DndOffReceiver"
-            android:exported="true" />
+            android:exported="false" />
 
-        <service
-            android:name=".base.AlwaysOnService"
-            android:exported="true"
-            android:foregroundServiceType="dataSync" />
         <receiver
             android:name=".base.BootCompletedReceiver"
             android:enabled="true"
             android:exported="true">
 
             <intent-filter>
-                <action android:name="android.intent.action.BOOT_COMPLETED"/>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
             </intent-filter>
 
         </receiver>
 
+        <service
+            android:name=".base.AlwaysOnService"
+            android:exported="false"
+            android:foregroundServiceType="dataSync" />
 
     </application>
 

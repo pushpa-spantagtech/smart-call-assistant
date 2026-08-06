@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<resources>
+
+    <style name="AppMaterialDialogTheme" parent="ThemeOverlay.MaterialComponents.MaterialAlertDialog">
+
+        <item name="colorPrimary">#3F669F</item>
+        <item name="colorSecondary">#3F669F</item>
+        <item name="colorSurface">#FFFFFF</item>
+        <item name="colorOnSurface">#111827</item>
+
+        <item name="shapeAppearanceMediumComponent">
+            @style/AppMaterialDialogShape
+        </item>
+
+    </style>
+
+    <style name="AppMaterialDialogShape" parent="ShapeAppearance.MaterialComponents.MediumComponent">
+
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">20dp</item>
+
+    </style>
+
+</resources>

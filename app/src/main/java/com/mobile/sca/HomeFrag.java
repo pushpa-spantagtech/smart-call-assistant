@@ -1,48 +1,30 @@
 package com.mobile.sca;
 
-import static android.content.Context.ALARM_SERVICE;
 import static android.view.View.GONE;
 import static android.view.View.VISIBLE;
 
-import static com.mobile.sca.base.TimeUtils.getDayOfWeek;
-import static com.mobile.sca.base.TimeUtils.to24Hour;
-
 import android.annotation.SuppressLint;
-import android.app.AlarmManager;
-import android.app.PendingIntent;
 import android.content.Intent;
-import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.LinearLayout;
-import android.widget.Switch;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.mobile.sca.base.AlarmAdapter;
 import com.mobile.sca.base.AlarmModal;
-import com.mobile.sca.base.AlarmReceiver;
-import com.mobile.sca.base.AlwaysOnService;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.List;
 import java.util.Locale;
-import java.util.Objects;
 
 public class HomeFrag extends Fragment {
 
@@ -90,6 +72,7 @@ public class HomeFrag extends Fragment {
     public void reload() {
         checkNow();
     }
+
     public static void deleteNow(AlarmEntity alarm) {
         Toast.makeText(ins.getActivity(), "Successfully deleted.", Toast.LENGTH_SHORT).show();
         AlarmDatabase.getInstance(ins.getActivity())
@@ -126,7 +109,7 @@ public class HomeFrag extends Fragment {
         int count = AlarmDatabase.getInstance(getContext())
                 .alarmDao()
                 .getAlarmCount();
-        if(count > 0) {
+        if (count > 0) {
 
             List<AlarmModal> list = new ArrayList<>();
             List<AlarmEntity> alarmList =

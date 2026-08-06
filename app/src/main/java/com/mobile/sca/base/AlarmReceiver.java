@@ -1,11 +1,9 @@
 package com.mobile.sca.base;
 
 import static android.content.Context.MODE_PRIVATE;
-import static android.content.Context.NOTIFICATION_SERVICE;
 
 import android.annotation.SuppressLint;
 import android.app.AlarmManager;
-import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -13,24 +11,21 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.util.Log;
 
-import androidx.core.content.ContextCompat;
-
 import com.mobile.sca.AlarmDatabase;
-import com.mobile.sca.AlarmEntity;
 import com.mobile.sca.HomeFrag;
 
-import java.util.Calendar;
 import java.util.HashSet;
 import java.util.Set;
 
 public class AlarmReceiver extends BroadcastReceiver {
 
-    SharedPreferences pref ;
+    SharedPreferences pref;
+
     @Override
     public void onReceive(Context context, Intent intent) {
 
         boolean turnOn = intent.getBooleanExtra("TURN_ON", true);
-        pref = context.getSharedPreferences("status",MODE_PRIVATE);
+        pref = context.getSharedPreferences("status", MODE_PRIVATE);
 
         int alarmId = intent.getIntExtra("ALARM_ID", -1);
         String title = intent.getStringExtra("TITLE");
@@ -38,21 +33,21 @@ public class AlarmReceiver extends BroadcastReceiver {
         long durationMs = intent.getLongExtra("DURATION_MS", 0);
 
         String Req = intent.getStringExtra("Req");
-        Log.e("dayOfWeek", ""+dayOfWeek);
+        Log.e("dayOfWeek", "" + dayOfWeek);
 
-        if(dayOfWeek != -1) {
+        if (dayOfWeek != -1) {
             if (turnOn) {
                 DndUtils.setDnd(context, true);
                 SharedPreferences prefs =
-                        context.getSharedPreferences(""+alarmId, Context.MODE_PRIVATE);
+                        context.getSharedPreferences("" + alarmId, Context.MODE_PRIVATE);
                 Set<String> savedSet =
                         prefs.getStringSet("KEY_REQUEST_CODES", new HashSet<>());
                 Set<String> updatedSet = new HashSet<>();
                 for (String item : savedSet) {
                     String[] parts = item.split("::");
                     int rc = Integer.parseInt(parts[0]);
-                    Log.e("ItemInReceiver", item +" "+Req);
-                    if(("" + rc).equals("" + Req)) {
+                    Log.e("ItemInReceiver", item + " " + Req);
+                    if (("" + rc).equals("" + Req)) {
                         updatedSet.add(rc + "::" + "Fired");
                     } else {
                         updatedSet.add(item);
@@ -66,28 +61,28 @@ public class AlarmReceiver extends BroadcastReceiver {
                 scheduleDndOffWeekly(alarmId, Req, context, Integer.parseInt(Req), durationMs, title);
                 try {
                     HomeFrag.ins.reload();
-                }catch (Exception e){
+                } catch (Exception e) {
 
                 }
                 try {
                     Intent updateIntent = new Intent(context, AlwaysOnService.class);
                     updateIntent.putExtra("title", title.split("::")[0]);
-                    updateIntent.putExtra("message", title.split("::")[0] +" meeting is started");
+                    updateIntent.putExtra("message", title.split("::")[0] + " meeting is started");
 
                     context.startService(updateIntent);
+                } catch (Exception e) {
                 }
-                catch (Exception e){}
             } else {
                 SharedPreferences prefs =
-                        context.getSharedPreferences(""+alarmId, Context.MODE_PRIVATE);
+                        context.getSharedPreferences("" + alarmId, Context.MODE_PRIVATE);
                 Set<String> savedSet =
                         prefs.getStringSet("KEY_REQUEST_CODES", new HashSet<>());
                 Set<String> updatedSet = new HashSet<>();
                 for (String item : savedSet) {
                     String[] parts = item.split("::");
                     int rc = Integer.parseInt(parts[0]);
-                    Log.e("ItemInReceiver", item +" "+Req);
-                    if(("" + rc).equals("" + Req)) {
+                    Log.e("ItemInReceiver", item + " " + Req);
+                    if (("" + rc).equals("" + Req)) {
                         updatedSet.add(rc + "::" + "Completed");
                     } else {
                         updatedSet.add(item);
@@ -104,15 +99,13 @@ public class AlarmReceiver extends BroadcastReceiver {
                 try {
                     Intent updateIntent = new Intent(context, AlwaysOnService.class);
                     updateIntent.putExtra("title", title.split("::")[0]);
-                    updateIntent.putExtra("message", title.split("::")[0] +" meeting is ended now");
+                    updateIntent.putExtra("message", title.split("::")[0] + " meeting is ended now");
 
                     context.startService(updateIntent);
+                } catch (Exception e) {
                 }
-                catch (Exception e){}
             }
-        }
-
-        else {
+        } else {
             if (turnOn) {
 
                 // 🔕 Turn ON DND
@@ -131,11 +124,11 @@ public class AlarmReceiver extends BroadcastReceiver {
                 try {
                     Intent updateIntent = new Intent(context, AlwaysOnService.class);
                     updateIntent.putExtra("title", title.split("::")[0]);
-                    updateIntent.putExtra("message", title.split("::")[0]+" meeting is started");
+                    updateIntent.putExtra("message", title.split("::")[0] + " meeting is started");
 
                     context.startService(updateIntent);
+                } catch (Exception e) {
                 }
-                catch (Exception e){}
             } else {
                 Log.e("TurnOffRequest", "" + alarmId + " " + title);
                 assert title != null;
@@ -149,10 +142,11 @@ public class AlarmReceiver extends BroadcastReceiver {
                 try {
                     Intent updateIntent = new Intent(context, AlwaysOnService.class);
                     updateIntent.putExtra("title", title.split("::")[0]);
-                    updateIntent.putExtra("message", title.split("::")[0]+" meeting is ended now");
+                    updateIntent.putExtra("message", title.split("::")[0] + " meeting is ended now");
 
                     context.startService(updateIntent);
-                } catch (Exception e){}
+                } catch (Exception e) {
+                }
                 try {
                     HomeFrag.ins.reload();
                 } catch (Exception e) {
@@ -165,13 +159,13 @@ public class AlarmReceiver extends BroadcastReceiver {
     private void scheduleDndOff(Context context, int alarmId, long durationMs, String title) {
 
         long triggerAt = System.currentTimeMillis() + durationMs;
-        Log.e("TurnOffRequestInitiated", ""+alarmId);
-        Log.e("NewCOde", ""+(alarmId + 999));
+        Log.e("TurnOffRequestInitiated", "" + alarmId);
+        Log.e("NewCOde", "" + (alarmId + 999));
 
 
         Intent intent = new Intent(context, AlarmReceiver.class);
         intent.putExtra("TURN_ON", false);
-        intent.putExtra("TITLE", title.replace("ACTIVE","FIRED"));
+        intent.putExtra("TITLE", title.replace("ACTIVE", "FIRED"));
         intent.putExtra("ALARM_ID", (alarmId + 999));
 
         PendingIntent pi = PendingIntent.getBroadcast(
@@ -190,6 +184,7 @@ public class AlarmReceiver extends BroadcastReceiver {
                 pi
         );
     }
+
     @SuppressLint("ScheduleExactAlarm")
     private void scheduleDndOffWeekly(int id, String Req1, Context context, int Req, long durationMs, String title) {
 
@@ -198,9 +193,9 @@ public class AlarmReceiver extends BroadcastReceiver {
 
         Intent intent = new Intent(context, AlarmReceiver.class);
         intent.putExtra("TURN_ON", false);
-        intent.putExtra("TITLE", title.replace("ACTIVE","FIRED"));
+        intent.putExtra("TITLE", title.replace("ACTIVE", "FIRED"));
         intent.putExtra("DAY_OF_WEEK", 0);
-        intent.putExtra("Req", ""+(Req));
+        intent.putExtra("Req", "" + (Req));
         intent.putExtra("ALARM_ID", id);
 
         PendingIntent pi = PendingIntent.getBroadcast(

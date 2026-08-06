@@ -18,6 +18,7 @@ public class OnboardingAdapter extends RecyclerView.Adapter<OnboardingAdapter.Vi
     private static final int TOTAL_PAGES = 3;
     private final OnboardingActionListener listener;
     Context context;
+
     public OnboardingAdapter(OnboardingActionListener listener, Context applicationContext) {
         this.listener = listener;
         context = applicationContext;
@@ -80,13 +81,12 @@ public class OnboardingAdapter extends RecyclerView.Adapter<OnboardingAdapter.Vi
                 continueBtn.setOnClickListener(v -> {
                     if (ccp.isValidFullNumber()) {
                         String phone = ccp.getFullNumberWithPlus();
-                        listener.onPhoneContinueClicked(phone, viewType + 1 );
+                        listener.onPhoneContinueClicked(phone, viewType + 1);
                     } else {
                         Toast.makeText(context, "Please enter a valid phone number", Toast.LENGTH_SHORT).show();
                     }
                 });
-            }
-            else if (viewType == 1) {
+            } else if (viewType == 1) {
                 verify = itemView.findViewById(R.id.verify);
                 verify.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -94,8 +94,7 @@ public class OnboardingAdapter extends RecyclerView.Adapter<OnboardingAdapter.Vi
                         listener.onPhoneContinueClicked("phone", viewType + 1);
                     }
                 });
-            }
-            else if (viewType == 2) {
+            } else if (viewType == 2) {
                 signup = itemView.findViewById(R.id.signup);
                 signup.setOnClickListener(new View.OnClickListener() {
                     @Override

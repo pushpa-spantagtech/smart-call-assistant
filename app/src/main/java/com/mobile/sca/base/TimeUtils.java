@@ -11,11 +11,8 @@ import android.util.Log;
 import com.mobile.sca.AlarmDatabase;
 import com.mobile.sca.AlarmEntity;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.HashSet;
-import java.util.Locale;
 import java.util.Set;
 
 public class TimeUtils {
@@ -83,7 +80,7 @@ public class TimeUtils {
         intent.putExtra("DURATION_MS", alarm.duration * 60L * 1000L);
         intent.putExtra("TURN_ON", true);
         intent.putExtra("TITLE", alarm.title);
-        intent.putExtra("Req", ""+alarm.id);
+        intent.putExtra("Req", "" + alarm.id);
 
         PendingIntent pi = PendingIntent.getBroadcast(
                 context,
@@ -101,6 +98,7 @@ public class TimeUtils {
         );
 
     }
+
     public static int to24Hour(int hour, String amPm) {
         if ("AM".equals(amPm)) {
             return hour == 12 ? 0 : hour;
@@ -161,19 +159,26 @@ public class TimeUtils {
                     cal.getTimeInMillis(),
                     pi
             );
-            Log.e("AlarmSetWithWeekDays","Yes");
+            Log.e("AlarmSetWithWeekDays", "Yes");
         }
     }
 
     public static int getDayOfWeek(String day) {
         switch (day) {
-            case "Mon": return Calendar.MONDAY;
-            case "Tue": return Calendar.TUESDAY;
-            case "Wed": return Calendar.WEDNESDAY;
-            case "Thu": return Calendar.THURSDAY;
-            case "Fri": return Calendar.FRIDAY;
-            case "Sat": return Calendar.SATURDAY;
-            default: return Calendar.SUNDAY;
+            case "Mon":
+                return Calendar.MONDAY;
+            case "Tue":
+                return Calendar.TUESDAY;
+            case "Wed":
+                return Calendar.WEDNESDAY;
+            case "Thu":
+                return Calendar.THURSDAY;
+            case "Fri":
+                return Calendar.FRIDAY;
+            case "Sat":
+                return Calendar.SATURDAY;
+            default:
+                return Calendar.SUNDAY;
         }
     }
 
@@ -181,7 +186,7 @@ public class TimeUtils {
     public static void scheduleWeeklyAlarmsWithDate(Context context, AlarmEntity alarm) {
         String[] days = alarm.days.trim().split(",");
         SharedPreferences prefs =
-                context.getSharedPreferences(""+alarm.id, Context.MODE_PRIVATE);
+                context.getSharedPreferences("" + alarm.id, Context.MODE_PRIVATE);
 
         Set<String> requestCodeSet =
                 new HashSet<>(prefs.getStringSet("KEY_REQUEST_CODES", new HashSet<>()));
@@ -239,7 +244,7 @@ public class TimeUtils {
                                 + targetDay * 100
                                 + cal.get(Calendar.WEEK_OF_YEAR);
 
-                intent.putExtra("Req", ""+requestCode);
+                intent.putExtra("Req", "" + requestCode);
 
                 PendingIntent pi = PendingIntent.getBroadcast(
                         context,
@@ -248,16 +253,16 @@ public class TimeUtils {
                         PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE
                 );
 
-                if(cal.getTimeInMillis() > now.getTimeInMillis()) {
-                    Log.e("Alarm Date..>>>.....", ""+cal.getTime());
-                    Log.e("requestCode", ""+requestCode);
+                if (cal.getTimeInMillis() > now.getTimeInMillis()) {
+                    Log.e("Alarm Date..>>>.....", "" + cal.getTime());
+                    Log.e("requestCode", "" + requestCode);
                     AlarmManager am = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
                     am.setExactAndAllowWhileIdle(
                             AlarmManager.RTC_WAKEUP,
                             cal.getTimeInMillis(),
                             pi
                     );
-                    requestCodeSet.add(requestCode+"::"+"ACTIVE");
+                    requestCodeSet.add(requestCode + "::" + "ACTIVE");
                 }
                 cal.add(Calendar.WEEK_OF_YEAR, 1);
             }
@@ -266,10 +271,11 @@ public class TimeUtils {
                 .putStringSet("KEY_REQUEST_CODES", requestCodeSet)
                 .apply();
     }
+
     public static void cancelWeeklyAlarmsWithDate(Context context, AlarmEntity alarm) {
 
         String[] days = alarm.days.trim().split(",");
-        Log.e("ALRAMCANCEL ID", ""+alarm.id);
+        Log.e("ALRAMCANCEL ID", "" + alarm.id);
 
         // -------- START DATE --------
         Calendar startCal = Calendar.getInstance();
@@ -294,7 +300,7 @@ public class TimeUtils {
         AlarmManager am = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
 
         SharedPreferences prefs =
-                context.getSharedPreferences(""+alarm.id, Context.MODE_PRIVATE);
+                context.getSharedPreferences("" + alarm.id, Context.MODE_PRIVATE);
 
         Set<String> savedSet =
                 prefs.getStringSet("KEY_REQUEST_CODES", new HashSet<>());
@@ -334,7 +340,7 @@ public class TimeUtils {
                                 + targetDay * 100
                                 + cal.get(Calendar.WEEK_OF_YEAR);
 
-                Log.e("cancel id", ""+requestCode);
+                Log.e("cancel id", "" + requestCode);
 
 
                 Intent intent = new Intent(context, AlarmReceiver.class);
@@ -356,9 +362,8 @@ public class TimeUtils {
                         intent,
                         PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE
                 );
-                Log.e("cancel id_222", ""+requestCode);
+                Log.e("cancel id_222", "" + requestCode);
                 am.cancel(pi);
-
 
 
                 cal.add(Calendar.WEEK_OF_YEAR, 1);
@@ -367,7 +372,7 @@ public class TimeUtils {
 
         AlarmDatabase.getInstance(context)
                 .alarmDao()
-                .updateAlarmTitle(alarm.id, alarm.title.replace("ON","OFF"));
+                .updateAlarmTitle(alarm.id, alarm.title.replace("ON", "OFF"));
 
 
         Log.e("AlarmCancel", "All scheduled alarms cancelled for: " + alarm.title);

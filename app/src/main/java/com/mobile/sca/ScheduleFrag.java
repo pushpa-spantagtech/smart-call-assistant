@@ -1,24 +1,16 @@
 package com.mobile.sca;
 
-import static android.content.Context.ALARM_SERVICE;
 import static android.content.Context.MODE_PRIVATE;
 import static android.view.View.GONE;
 import static android.view.View.VISIBLE;
 
-import static com.mobile.sca.base.TimeUtils.cancelWeeklyAlarms;
-import static com.mobile.sca.base.TimeUtils.getDayOfWeek;
-import static com.mobile.sca.base.TimeUtils.to24Hour;
-
 import android.annotation.SuppressLint;
-import android.app.AlarmManager;
 import android.app.DatePickerDialog;
-import android.app.PendingIntent;
 import android.app.TimePickerDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.Build;
 import android.os.Bundle;
@@ -31,31 +23,25 @@ import android.widget.LinearLayout;
 import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
-import android.widget.Toolbar;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
-import com.mobile.sca.base.AlarmReceiver;
-import com.mobile.sca.base.AlwaysOnService;
-import com.mobile.sca.base.TimeUtils;
 import com.google.android.material.chip.Chip;
 import com.google.android.material.chip.ChipGroup;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.gson.Gson;
-
-import org.w3c.dom.Text;
+import com.mobile.sca.base.AlwaysOnService;
+import com.mobile.sca.base.TimeUtils;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Locale;
-import java.util.Objects;
 import java.util.Set;
 
 public class ScheduleFrag extends Fragment {
@@ -80,7 +66,7 @@ public class ScheduleFrag extends Fragment {
 
     TextView b2, b1;
 
-    LinearLayout dates,dates1, dates2, repeat;
+    LinearLayout dates, dates1, dates2, repeat;
     Calendar calendar;
     StringBuilder repeatDays;
 
@@ -95,11 +81,12 @@ public class ScheduleFrag extends Fragment {
             chip.setChecked(true);
         }
     }
-    public int getAllChipStatus () {
+
+    public int getAllChipStatus() {
         int count = 0;
         for (int i = 0; i < daysChipGroup.getChildCount(); i++) {
             Chip chip = (Chip) daysChipGroup.getChildAt(i);
-            if(!chip.isChecked()) {
+            if (!chip.isChecked()) {
                 count++;
             }
         }
@@ -136,12 +123,12 @@ public class ScheduleFrag extends Fragment {
         dateText = view.findViewById(R.id.dateText);
         endDate = view.findViewById(R.id.endDateText);
 
-        b1= view.findViewById(R.id.b1);
-        b2= view.findViewById(R.id.b2);
-        dates= view.findViewById(R.id.dates);
+        b1 = view.findViewById(R.id.b1);
+        b2 = view.findViewById(R.id.b2);
+        dates = view.findViewById(R.id.dates);
 
-        dates1= view.findViewById(R.id.dates1);
-        dates2= view.findViewById(R.id.dates2);
+        dates1 = view.findViewById(R.id.dates1);
+        dates2 = view.findViewById(R.id.dates2);
 
         Calendar now = Calendar.getInstance();
 
@@ -162,7 +149,7 @@ public class ScheduleFrag extends Fragment {
 
             chip.setOnCheckedChangeListener((button, checked) -> {
                 chip.setTypeface(null, checked ? Typeface.BOLD : Typeface.NORMAL);
-                if(dates.getVisibility() == VISIBLE) {
+                if (dates.getVisibility() == VISIBLE) {
                     int count = getAllChipStatus();
                     if (count == daysChipGroup.getChildCount()) {
                         Toast.makeText(getActivity(), "Requires at least one day to schedule", Toast.LENGTH_SHORT).show();
@@ -263,7 +250,7 @@ public class ScheduleFrag extends Fragment {
             Log.e("Title", alarm.title);
             bar.setTitle("Recreate schedule");
             labelInput.setText("Title");
-            if(alarm.endday == 0) {
+            if (alarm.endday == 0) {
 
                 dates.setVisibility(GONE);
                 repeat.setVisibility(GONE);
@@ -287,7 +274,7 @@ public class ScheduleFrag extends Fragment {
 
                 saveAlarmBtn.setText("Scedule Now");
                 updateDateUI(0);
-                durationText.setText(""+alarm.duration +" min");
+                durationText.setText("" + alarm.duration + " min");
 
                 hour = alarm.hour;
                 minute = alarm.minute;
@@ -385,23 +372,22 @@ public class ScheduleFrag extends Fragment {
 
         int count = (int) (System.currentTimeMillis() & 0x7FFFFFFF);
 
-        Log.e("Count::;", ""+count);
+        Log.e("Count::;", "" + count);
 
         repeatDays = new StringBuilder();
-        if(labelInput.getText().toString().equals("")) {
+        if (labelInput.getText().toString().equals("")) {
             Toast.makeText(getActivity(), "Please enter the activity name", Toast.LENGTH_SHORT).show();
-            return ;
+            return;
         }
-        if(dates.getVisibility() == VISIBLE) {
-            if(dateText.getText().equals("Start Date")) {
+        if (dates.getVisibility() == VISIBLE) {
+            if (dateText.getText().equals("Start Date")) {
                 Toast.makeText(getActivity(), "Select start Date", Toast.LENGTH_SHORT).show();
                 return;
-            } else if(endDate.getText().equals("End Date")) {
+            } else if (endDate.getText().equals("End Date")) {
                 Toast.makeText(getActivity(), "Select End Date", Toast.LENGTH_SHORT).show();
                 return;
             }
         }
-
 
 
         for (int i = 0; i < daysChipGroup.getChildCount(); i++) {
@@ -415,7 +401,7 @@ public class ScheduleFrag extends Fragment {
             repeatDays.deleteCharAt(repeatDays.length() - 1);
         }
 
-        Log.e("Repeated Days", "."+repeatDays+".");
+        Log.e("Repeated Days", "." + repeatDays + ".");
         String title = labelInput.getText() != null
                 ? labelInput.getText().toString()
                 : "";
@@ -425,7 +411,7 @@ public class ScheduleFrag extends Fragment {
         alarm.minute = minute;
         alarm.amPm = isAm ? "AM" : "PM";
         alarm.days = repeatDays.toString();
-        alarm.title = title+ "::ACTIVE";
+        alarm.title = title + "::ACTIVE";
         alarm.duration = durationMinutes;
 
         alarm.year = year;
@@ -433,16 +419,16 @@ public class ScheduleFrag extends Fragment {
         alarm.day = day;
         alarm.id = (count + 1);
 
-        Log.e("hour:minute", ""+hour+":"+minute);
+        Log.e("hour:minute", "" + hour + ":" + minute);
 
-        if(endday != 0) {
+        if (endday != 0) {
             Log.e("Mode", "1");
-            if(alarm.days.isEmpty()) {
+            if (alarm.days.isEmpty()) {
                 alarm.days = "Mon,Tue,Wed,Thu,Fri,Sat,Sun";
             }
             Calendar start = Calendar.getInstance();
-            Log.e("Day", ""+day);
-            Log.e("EndDay", ""+endday);
+            Log.e("Day", "" + day);
+            Log.e("EndDay", "" + endday);
 
             start.set(year, month, day, 0, 0, 0);
             start.set(Calendar.MILLISECOND, 0);
@@ -457,7 +443,7 @@ public class ScheduleFrag extends Fragment {
             current.set(Calendar.SECOND, 0);
             current.set(Calendar.MILLISECOND, 0);
 
-            String[] arr= repeatDays.toString().split(",");
+            String[] arr = repeatDays.toString().split(",");
 
             if (isOverlappingWithExisting(alarm)) {
                 Toast.makeText(getActivity(),
@@ -504,26 +490,25 @@ public class ScheduleFrag extends Fragment {
                     Toast.makeText(getActivity(), "Invalid Schedule, Check manually", Toast.LENGTH_SHORT).show();
                 }
             }
-        }
-        else if (alarm.days.isEmpty()) {
+        } else if (alarm.days.isEmpty()) {
 
             Log.e("Mode", "2");
             Calendar now = Calendar.getInstance();
 
-            int year  = now.get(Calendar.YEAR);
+            int year = now.get(Calendar.YEAR);
             int month = now.get(Calendar.MONTH);        // ⚠️ 0–11
-            int day   = now.get(Calendar.DAY_OF_MONTH);
+            int day = now.get(Calendar.DAY_OF_MONTH);
 
             alarm.year = year;
             alarm.month = month;
             alarm.day = day;
             //alarm.id = count + 1;
-            boolean state = isOneTimeAlarmValid(year,month,day, hour, minute, isAm ? "AM" : "PM");
+            boolean state = isOneTimeAlarmValid(year, month, day, hour, minute, isAm ? "AM" : "PM");
 
             if (isOverlappingWithExisting(alarm)) {
                 Toast.makeText(getActivity(),
-                            "\uD83D\uDC49 “An alarm is already scheduled for this time",
-                            Toast.LENGTH_SHORT).show();
+                        "\uD83D\uDC49 “An alarm is already scheduled for this time",
+                        Toast.LENGTH_SHORT).show();
             } else {
 
                 if (state) {
@@ -552,9 +537,9 @@ public class ScheduleFrag extends Fragment {
         boolean alarmconflict = false;
 
         for (AlarmEntity oldAlarm : existingAlarms) {
-            if(oldAlarm.endday !=0) {
+            if (oldAlarm.endday != 0) {
                 SharedPreferences prefs =
-                        requireActivity().getSharedPreferences(""+oldAlarm.id, Context.MODE_PRIVATE);
+                        requireActivity().getSharedPreferences("" + oldAlarm.id, Context.MODE_PRIVATE);
 
                 Set<String> savedSet =
                         prefs.getStringSet("KEY_REQUEST_CODES", new HashSet<>());
@@ -562,26 +547,25 @@ public class ScheduleFrag extends Fragment {
                 int finished = 0;
                 for (String item : savedSet) {
                     Log.e("AdapterItem....>>>>>", item);
-                    if(item.contains("ACTIVE")) {
+                    if (item.contains("ACTIVE")) {
                         break;
-                    } else if(item.contains("CANCELLED")) {
+                    } else if (item.contains("CANCELLED")) {
                         break;
-                    } else if(item.contains("Completed")) {
-                        finished ++;
+                    } else if (item.contains("Completed")) {
+                        finished++;
                     } else {
                         break;
                     }
                 }
-                Log.e("CheckHappen", ""+savedSet.size()+".."+finished);
-                if(savedSet.size() != finished) {
+                Log.e("CheckHappen", "" + savedSet.size() + ".." + finished);
+                if (savedSet.size() != finished) {
                     // && !oldAlarm.title.contains("Completed")
                     boolean res = checkAlarmConflict(newAlarm, oldAlarm);
-                    if(!alarmconflict) {
+                    if (!alarmconflict) {
                         alarmconflict = res;
                     }
                 }
-            }
-            else if (checkAlarmConflict(newAlarm, oldAlarm)
+            } else if (checkAlarmConflict(newAlarm, oldAlarm)
                     && !oldAlarm.title.contains("Completed")
             ) {
                 alarmconflict = true;
@@ -598,24 +582,24 @@ public class ScheduleFrag extends Fragment {
         Log.e("newOcc", newOccurrences.toString());
         List<Long> oldOccurrences = generateOccurrences(oldAlarm);
 
-        Log.e("OldAram", ""+oldAlarm.endday);
-        Log.e("NewAlarm", ""+newAlarm.endday);
+        Log.e("OldAram", "" + oldAlarm.endday);
+        Log.e("NewAlarm", "" + newAlarm.endday);
 
         int conflict = 0;
         for (Long newStart : newOccurrences) {
             long newEnd = newStart + (newAlarm.duration * 60 * 1000);
             for (Long oldStart : oldOccurrences) {
                 long oldEnd = oldStart + (oldAlarm.duration * 60 * 1000);
-                Log.e("newStart",""+newStart);
-                Log.e("oldEnd",""+oldEnd);
-                Log.e("newEnd",""+newEnd);
-                Log.e("oldStart",""+oldStart);
+                Log.e("newStart", "" + newStart);
+                Log.e("oldEnd", "" + oldEnd);
+                Log.e("newEnd", "" + newEnd);
+                Log.e("oldStart", "" + oldStart);
                 if (newStart <= oldEnd && newEnd >= oldStart) {
-                    Log.e("Enter","enter");
-                   // return true; // ❌ conflict
+                    Log.e("Enter", "enter");
+                    // return true; // ❌ conflict
                     conflict++;
                 } else {
-                    Log.e("Enter","Failed");
+                    Log.e("Enter", "Failed");
                 }
             }
         }
@@ -710,6 +694,7 @@ public class ScheduleFrag extends Fragment {
         }
         return false;
     }
+
     private void startAlwaysOnService() {
         //Toast.makeText(getActivity(), "Start Service", Toast.LENGTH_SHORT).show();
         Intent svc = new Intent(getActivity(), AlwaysOnService.class);
@@ -719,6 +704,7 @@ public class ScheduleFrag extends Fragment {
             getActivity().startService(svc);
         }
     }
+
     private void showDurationPicker() {
 
         if (getContext() == null) return;
@@ -739,15 +725,33 @@ public class ScheduleFrag extends Fragment {
                 .setTitle("Alarm Duration")
                 .setItems(options, (dialog, which) -> {
                     switch (which) {
-                        case 0: durationMinutes = 1; break;
-                        case 1: durationMinutes = 2; break;
-                        case 2: durationMinutes = 5; break;
-                        case 3: durationMinutes = 10; break;
-                        case 4: durationMinutes = 15; break;
-                        case 5: durationMinutes = 30; break;
-                        case 6: durationMinutes = 60; break;
-                        case 7: durationMinutes = 75; break;
-                        case 8: durationMinutes = 90; break;
+                        case 0:
+                            durationMinutes = 1;
+                            break;
+                        case 1:
+                            durationMinutes = 2;
+                            break;
+                        case 2:
+                            durationMinutes = 5;
+                            break;
+                        case 3:
+                            durationMinutes = 10;
+                            break;
+                        case 4:
+                            durationMinutes = 15;
+                            break;
+                        case 5:
+                            durationMinutes = 30;
+                            break;
+                        case 6:
+                            durationMinutes = 60;
+                            break;
+                        case 7:
+                            durationMinutes = 75;
+                            break;
+                        case 8:
+                            durationMinutes = 90;
+                            break;
                     }
                     durationText.setText(durationMinutes + " min");
                 })
@@ -799,11 +803,11 @@ public class ScheduleFrag extends Fragment {
         );
         if (state == 0) {
             dateText.setText(date);
-        }
-        else {
+        } else {
             endDate.setText(date);
         }
     }
+
     public boolean isOneTimeAlarmValid(
             int year,
             int month,
@@ -875,14 +879,14 @@ public class ScheduleFrag extends Fragment {
 
             boolean weekdayMatch = false;
             for (String d : arr) {
-                Log.e("SlectedDay", ""+selectedDay +" "+d);
-                Log.e("SlectedDay11", ""+getDayOfWeek(d));
+                Log.e("SlectedDay", "" + selectedDay + " " + d);
+                Log.e("SlectedDay11", "" + getDayOfWeek(d));
                 if (getDayOfWeek(d) == selectedDay) {
                     weekdayMatch = true;
                     break;
                 }
             }
-            Log.e("weekdayMatch", ""+weekdayMatch);
+            Log.e("weekdayMatch", "" + weekdayMatch);
 
             if (!weekdayMatch) return false;
 
@@ -939,13 +943,20 @@ public class ScheduleFrag extends Fragment {
 
     int getDayOfWeek(String day) {
         switch (day) {
-            case "Mon": return Calendar.MONDAY;
-            case "Tue": return Calendar.TUESDAY;
-            case "Wed": return Calendar.WEDNESDAY;
-            case "Thu": return Calendar.THURSDAY;
-            case "Fri": return Calendar.FRIDAY;
-            case "Sat": return Calendar.SATURDAY;
-            default: return Calendar.SUNDAY;
+            case "Mon":
+                return Calendar.MONDAY;
+            case "Tue":
+                return Calendar.TUESDAY;
+            case "Wed":
+                return Calendar.WEDNESDAY;
+            case "Thu":
+                return Calendar.THURSDAY;
+            case "Fri":
+                return Calendar.FRIDAY;
+            case "Sat":
+                return Calendar.SATURDAY;
+            default:
+                return Calendar.SUNDAY;
         }
     }
 

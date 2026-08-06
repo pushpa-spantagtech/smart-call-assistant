@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.google.android.material.card.MaterialCardView
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -35,7 +34,7 @@
                     android:text=""
                     android:textSize="16sp"
                     android:textStyle="bold"
-                    android:textColor="#1F2937"/>
+                    android:textColor="#1F2937" />
 
                 <TextView
                     android:id="@+id/status"
@@ -48,7 +47,7 @@
                     android:textColor="#ffffff"
                     android:paddingHorizontal="8dp"
                     android:paddingVertical="2dp"
-                    android:background="@drawable/bg_status_active"/>
+                    android:background="@drawable/bg_status_active" />
             </LinearLayout>
 
             <!-- RIGHT -->
@@ -66,7 +65,7 @@
                     android:text="18:17"
                     android:textSize="22sp"
                     android:textStyle="bold"
-                    android:textColor="#3B82F6"/>
+                    android:textColor="#3B82F6" />
             </LinearLayout>
 
         </RelativeLayout>
@@ -79,7 +78,7 @@
             android:text="20/01/2025 - 27/01/2026"
             android:textSize="13sp"
             android:textColor="#9CA3AF"
-            android:layout_marginTop="4dp"/>
+            android:layout_marginTop="4dp" />
 
         <!-- DAYS + DURATION -->
         <LinearLayout
@@ -102,7 +101,7 @@
                     android:text="DAYS"
                     android:textSize="12sp"
                     android:id="@+id/txtDesc"
-                    android:textColor="#94A3B8"/>
+                    android:textColor="#94A3B8" />
 
                 <TextView
                     android:id="@+id/days"
@@ -111,7 +110,7 @@
                     android:text="Mon, Wed, Fri, Sun"
                     android:textSize="14sp"
                     android:textStyle="bold"
-                    android:textColor="#374151"/>
+                    android:textColor="#374151" />
             </LinearLayout>
 
             <!-- DURATION -->
@@ -127,7 +126,7 @@
                     android:layout_height="wrap_content"
                     android:text="DURATION"
                     android:textSize="12sp"
-                    android:textColor="#94A3B8"/>
+                    android:textColor="#94A3B8" />
 
                 <TextView
                     android:id="@+id/durationTxt"
@@ -136,7 +135,7 @@
                     android:text="2 minutes"
                     android:textSize="14sp"
                     android:textStyle="bold"
-                    android:textColor="#374151"/>
+                    android:textColor="#374151" />
             </LinearLayout>
 
         </LinearLayout>

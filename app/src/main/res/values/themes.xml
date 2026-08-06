@@ -2,15 +2,28 @@
 <resources>
 
     <style name="Theme.dnd" parent="android:Theme.Material.Light.NoActionBar" />
+
     <style name="AppTheme" parent="Theme.MaterialComponents.Light.NoActionBar">
-    <!-- Customize your theme here -->
+
+        <!-- Primary Colors -->
         <item name="colorPrimary">@color/purple_700</item>
         <item name="colorPrimaryVariant">@color/purple_700</item>
         <item name="colorOnPrimary">@color/white</item>
-        <item name="colorPrimaryDark">@color/purple_700</item>
-        <item name="android:windowLightStatusBar">false</item>
+
+        <!-- Status Bar -->
+        <item name="colorPrimaryDark">@android:color/white</item>
+        <item name="android:statusBarColor">@android:color/white</item>
+        <item name="android:windowLightStatusBar">true</item>
+
+        <!-- Navigation Bar -->
+        <item name="android:navigationBarColor">@android:color/white</item>
+
+        <!-- System Windows -->
+        <item name="android:windowDrawsSystemBarBackgrounds">true</item>
         <item name="android:fitsSystemWindows">true</item>
+
     </style>
+
     <style name="OtpBox">
         <item name="android:layout_width">40dp</item>
         <item name="android:layout_height">48dp</item>
@@ -20,4 +33,5 @@
         <item name="android:background">@drawable/edit_bg</item>
         <item name="android:layout_margin">4dp</item>
     </style>
+
 </resources>
