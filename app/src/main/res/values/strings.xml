@@ -154,4 +154,26 @@
     <string name="scheduler_logo">Scheduler application logo</string>
     <string name="back_to_previous_screen">Back</string>
 
+    <string name="contact_support_title">Need more help?</string>
+
+    <string name="contact_support_subtitle">
+    Contact our support team for any assistance regarding Smart Call Assistant.
+</string>
+
+    <string name="contact_support_email">support@yourdomain.com</string>
+
+    <string name="contact_support_phone">+91 9876543210</string>
+
+    <string name="contact_support_email_subject">
+    Smart Call Assistant Support
+</string>
+
+    <string name="contact_support_no_email_app">
+    No email application found.
+</string>
+
+    <string name="contact_support_no_dialer">
+    Unable to open phone dialer.
+</string>
+
 </resources>

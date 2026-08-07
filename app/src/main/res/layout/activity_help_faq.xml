@@ -324,6 +324,73 @@
 
             </com.google.android.material.card.MaterialCardView>
 
+            <!-- CONTACT SUPPORT -->
+
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                app:cardBackgroundColor="@color/white"
+                app:cardCornerRadius="18dp"
+                app:cardElevation="1dp"
+                app:strokeColor="#E5E7EB"
+                app:strokeWidth="1dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="18dp">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/contact_support_title"
+                        android:textColor="#111827"
+                        android:textSize="18sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="6dp"
+                        android:text="@string/contact_support_subtitle"
+                        android:textColor="#6B7280"
+                        android:textSize="14sp" />
+
+                    <TextView
+                        android:id="@+id/txtSupportEmail"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="2dp"
+                        android:background="?attr/selectableItemBackground"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:paddingTop="8dp"
+                        android:paddingBottom="8dp"
+                        android:text="@string/contact_support_email"
+                        android:textColor="@color/purple_700"
+                        android:textSize="15sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/txtSupportPhone"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="?attr/selectableItemBackground"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:paddingTop="8dp"
+                        android:paddingBottom="8dp"
+                        android:text="@string/contact_support_phone"
+                        android:textColor="@color/purple_700"
+                        android:textSize="15sp"
+                        android:textStyle="bold" />
+
+                </LinearLayout>
+
+            </com.google.android.material.card.MaterialCardView>
+
         </LinearLayout>
 
     </androidx.core.widget.NestedScrollView>
