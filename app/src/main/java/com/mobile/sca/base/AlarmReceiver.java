@@ -1,7 +1,5 @@
 package com.mobile.sca.base;
 
-import static android.content.Context.MODE_PRIVATE;
-
 import android.annotation.SuppressLint;
 import android.app.AlarmManager;
 import android.app.PendingIntent;
@@ -19,199 +17,287 @@ import java.util.Set;
 
 public class AlarmReceiver extends BroadcastReceiver {
 
-    SharedPreferences pref;
+    private static final String TAG = "AlarmReceiver";
+    private static final int OFF_REQUEST_OFFSET = 1_000_000;
 
     @Override
     public void onReceive(Context context, Intent intent) {
-
         boolean turnOn = intent.getBooleanExtra("TURN_ON", true);
-        pref = context.getSharedPreferences("status", MODE_PRIVATE);
-
         int alarmId = intent.getIntExtra("ALARM_ID", -1);
-        String title = intent.getStringExtra("TITLE");
+        String title = safeTitle(intent.getStringExtra("TITLE"));
         int dayOfWeek = intent.getIntExtra("DAY_OF_WEEK", -1);
-        long durationMs = intent.getLongExtra("DURATION_MS", 0);
+        long durationMs = Math.max(0L, intent.getLongExtra("DURATION_MS", 0L));
+        String requestCodeText = intent.getStringExtra("Req");
+        int occurrenceRequestCode = parseRequestCode(requestCodeText, alarmId);
+        String sessionToken = intent.getStringExtra("SESSION_TOKEN");
 
-        String Req = intent.getStringExtra("Req");
-        Log.e("dayOfWeek", "" + dayOfWeek);
+        if (sessionToken == null || sessionToken.trim().isEmpty()) {
+            sessionToken = buildSessionToken(alarmId, occurrenceRequestCode);
+        }
 
-        if (dayOfWeek != -1) {
-            if (turnOn) {
-                DndUtils.setDnd(context, true);
-                SharedPreferences prefs =
-                        context.getSharedPreferences("" + alarmId, Context.MODE_PRIVATE);
-                Set<String> savedSet =
-                        prefs.getStringSet("KEY_REQUEST_CODES", new HashSet<>());
-                Set<String> updatedSet = new HashSet<>();
-                for (String item : savedSet) {
-                    String[] parts = item.split("::");
-                    int rc = Integer.parseInt(parts[0]);
-                    Log.e("ItemInReceiver", item + " " + Req);
-                    if (("" + rc).equals("" + Req)) {
-                        updatedSet.add(rc + "::" + "Fired");
-                    } else {
-                        updatedSet.add(item);
-                    }
-                }
-                prefs.edit()
-                        .putStringSet("KEY_REQUEST_CODES", updatedSet)
-                        .apply();
-                assert Req != null;
-                assert title != null;
-                scheduleDndOffWeekly(alarmId, Req, context, Integer.parseInt(Req), durationMs, title);
-                try {
-                    HomeFrag.ins.reload();
-                } catch (Exception e) {
+        Log.d(TAG, "turnOn=" + turnOn + ", alarmId=" + alarmId
+                + ", requestCode=" + occurrenceRequestCode
+                + ", token=" + sessionToken);
 
-                }
-                try {
-                    Intent updateIntent = new Intent(context, AlwaysOnService.class);
-                    updateIntent.putExtra("title", title.split("::")[0]);
-                    updateIntent.putExtra("message", title.split("::")[0] + " meeting is started");
-
-                    context.startService(updateIntent);
-                } catch (Exception e) {
-                }
-            } else {
-                SharedPreferences prefs =
-                        context.getSharedPreferences("" + alarmId, Context.MODE_PRIVATE);
-                Set<String> savedSet =
-                        prefs.getStringSet("KEY_REQUEST_CODES", new HashSet<>());
-                Set<String> updatedSet = new HashSet<>();
-                for (String item : savedSet) {
-                    String[] parts = item.split("::");
-                    int rc = Integer.parseInt(parts[0]);
-                    Log.e("ItemInReceiver", item + " " + Req);
-                    if (("" + rc).equals("" + Req)) {
-                        updatedSet.add(rc + "::" + "Completed");
-                    } else {
-                        updatedSet.add(item);
-                    }
-                }
-                prefs.edit()
-                        .putStringSet("KEY_REQUEST_CODES", updatedSet)
-                        .apply();
-                DndUtils.setDnd(context, false);
-                try {
-                    HomeFrag.ins.reload();
-                } catch (Exception ignored) {
-                }
-                try {
-                    Intent updateIntent = new Intent(context, AlwaysOnService.class);
-                    updateIntent.putExtra("title", title.split("::")[0]);
-                    updateIntent.putExtra("message", title.split("::")[0] + " meeting is ended now");
-
-                    context.startService(updateIntent);
-                } catch (Exception e) {
-                }
-            }
+        if (turnOn) {
+            handleStart(
+                    context,
+                    alarmId,
+                    occurrenceRequestCode,
+                    sessionToken,
+                    title,
+                    dayOfWeek,
+                    durationMs
+            );
         } else {
-            if (turnOn) {
-
-                // 🔕 Turn ON DND
-                DndUtils.setDnd(context, true);
-                assert title != null;
-                AlarmDatabase.getInstance(context)
-                        .alarmDao()
-                        .updateAlarmTitle(alarmId, title.replace("ACTIVE", "FIRED"));
-
-
-                pref.edit().putInt("alarmId", alarmId).commit();
-                pref.edit().putLong("durationMs", durationMs).commit();
-                Log.e("TurnONRequest", "" + alarmId);
-                scheduleDndOff(context, alarmId, durationMs, title);
-                HomeFrag.ins.reload();
-                try {
-                    Intent updateIntent = new Intent(context, AlwaysOnService.class);
-                    updateIntent.putExtra("title", title.split("::")[0]);
-                    updateIntent.putExtra("message", title.split("::")[0] + " meeting is started");
-
-                    context.startService(updateIntent);
-                } catch (Exception e) {
-                }
-            } else {
-                Log.e("TurnOffRequest", "" + alarmId + " " + title);
-                assert title != null;
-                if (title.contains("FIRED")) {
-                    AlarmDatabase.getInstance(context)
-                            .alarmDao()
-                            .updateAlarmTitle((alarmId - 999), title.replace("FIRED", "Completed"));
-                }
-                // 🔔 Turn OFF DND
-                DndUtils.setDnd(context, false);
-                try {
-                    Intent updateIntent = new Intent(context, AlwaysOnService.class);
-                    updateIntent.putExtra("title", title.split("::")[0]);
-                    updateIntent.putExtra("message", title.split("::")[0] + " meeting is ended now");
-
-                    context.startService(updateIntent);
-                } catch (Exception e) {
-                }
-                try {
-                    HomeFrag.ins.reload();
-                } catch (Exception e) {
-                }
-            }
+            handleEnd(
+                    context,
+                    alarmId,
+                    occurrenceRequestCode,
+                    sessionToken,
+                    title,
+                    dayOfWeek
+            );
         }
     }
 
-    @SuppressLint("ScheduleExactAlarm")
-    private void scheduleDndOff(Context context, int alarmId, long durationMs, String title) {
+    private void handleStart(
+            Context context,
+            int alarmId,
+            int occurrenceRequestCode,
+            String sessionToken,
+            String title,
+            int dayOfWeek,
+            long durationMs
+    ) {
+        long endAtMillis = System.currentTimeMillis() + durationMs;
 
-        long triggerAt = System.currentTimeMillis() + durationMs;
-        Log.e("TurnOffRequestInitiated", "" + alarmId);
-        Log.e("NewCOde", "" + (alarmId + 999));
-
-
-        Intent intent = new Intent(context, AlarmReceiver.class);
-        intent.putExtra("TURN_ON", false);
-        intent.putExtra("TITLE", title.replace("ACTIVE", "FIRED"));
-        intent.putExtra("ALARM_ID", (alarmId + 999));
-
-        PendingIntent pi = PendingIntent.getBroadcast(
+        boolean dndEnabled = DndSessionManager.startSession(
                 context,
-                (alarmId + 999),
-                intent,
-                PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE
+                sessionToken,
+                endAtMillis,
+                title
         );
 
-        AlarmManager am =
-                (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
+        if (!dndEnabled) {
+            Log.e(TAG, "DND was not enabled because Notification Policy access is missing");
+            sendStatusNotification(
+                    context,
+                    "Permission required",
+                    "Allow Do Not Disturb access so scheduled meetings can enable DND."
+            );
+            return;
+        }
 
-        am.setExactAndAllowWhileIdle(
-                AlarmManager.RTC_WAKEUP,
-                triggerAt,
-                pi
+        if (dayOfWeek != -1) {
+            updateRecurringOccurrenceStatus(
+                    context,
+                    alarmId,
+                    occurrenceRequestCode,
+                    "Fired"
+            );
+        } else {
+            updateOneTimeStatus(context, alarmId, title, "ACTIVE", "FIRED");
+            SharedPreferences statusPrefs =
+                    context.getSharedPreferences("status", Context.MODE_PRIVATE);
+            statusPrefs.edit()
+                    .putInt("alarmId", alarmId)
+                    .putLong("durationMs", durationMs)
+                    .apply();
+        }
+
+        scheduleEndAlarm(
+                context,
+                alarmId,
+                occurrenceRequestCode,
+                sessionToken,
+                endAtMillis,
+                title,
+                dayOfWeek
+        );
+
+        reloadHome();
+        sendStatusNotification(
+                context,
+                displayTitle(title),
+                displayTitle(title) + " meeting has started"
         );
     }
 
-    @SuppressLint("ScheduleExactAlarm")
-    private void scheduleDndOffWeekly(int id, String Req1, Context context, int Req, long durationMs, String title) {
+    private void handleEnd(
+            Context context,
+            int alarmId,
+            int occurrenceRequestCode,
+            String sessionToken,
+            String title,
+            int dayOfWeek
+    ) {
+        if (dayOfWeek != -1) {
+            updateRecurringOccurrenceStatus(
+                    context,
+                    alarmId,
+                    occurrenceRequestCode,
+                    "Completed"
+            );
+        } else {
+            updateOneTimeStatus(context, alarmId, title, "FIRED", "Completed");
+        }
 
-        long triggerAt = System.currentTimeMillis() + durationMs;
+        // DND is restored only when no other meeting session is active.
+        boolean restored = DndSessionManager.endSession(context, sessionToken);
+        if (!restored && !DndSessionManager.hasPolicyAccess(context)) {
+            Log.e(TAG, "Could not restore DND because Notification Policy access is missing");
+        }
 
-
-        Intent intent = new Intent(context, AlarmReceiver.class);
-        intent.putExtra("TURN_ON", false);
-        intent.putExtra("TITLE", title.replace("ACTIVE", "FIRED"));
-        intent.putExtra("DAY_OF_WEEK", 0);
-        intent.putExtra("Req", "" + (Req));
-        intent.putExtra("ALARM_ID", id);
-
-        PendingIntent pi = PendingIntent.getBroadcast(
+        reloadHome();
+        sendStatusNotification(
                 context,
-                (Req),
-                intent,
+                displayTitle(title),
+                displayTitle(title) + " meeting has ended"
+        );
+    }
+
+    /**
+     * Used both during normal scheduling and after a phone reboot.
+     */
+    @SuppressLint("ScheduleExactAlarm")
+    public static void scheduleEndAlarm(
+            Context context,
+            int alarmId,
+            int occurrenceRequestCode,
+            String sessionToken,
+            long endAtMillis,
+            String title,
+            int dayOfWeek
+    ) {
+        Intent endIntent = new Intent(context, AlarmReceiver.class);
+        endIntent.putExtra("TURN_ON", false);
+        endIntent.putExtra("ALARM_ID", alarmId);
+        endIntent.putExtra("Req", String.valueOf(occurrenceRequestCode));
+        endIntent.putExtra("SESSION_TOKEN", sessionToken);
+        endIntent.putExtra("TITLE", title.replace("ACTIVE", "FIRED"));
+        endIntent.putExtra("DAY_OF_WEEK", dayOfWeek);
+
+        int endRequestCode = endRequestCode(occurrenceRequestCode);
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(
+                context,
+                endRequestCode,
+                endIntent,
                 PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE
         );
 
-        AlarmManager am =
+        AlarmManager alarmManager =
                 (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
+        if (alarmManager == null) {
+            Log.e(TAG, "AlarmManager is unavailable");
+            return;
+        }
 
-        am.setExactAndAllowWhileIdle(
+        long triggerAt = Math.max(System.currentTimeMillis() + 1000L, endAtMillis);
+        alarmManager.setExactAndAllowWhileIdle(
                 AlarmManager.RTC_WAKEUP,
                 triggerAt,
-                pi
+                pendingIntent
         );
+    }
+
+    private static int endRequestCode(int occurrenceRequestCode) {
+        long candidate = (long) occurrenceRequestCode + OFF_REQUEST_OFFSET;
+        if (candidate > Integer.MAX_VALUE) {
+            candidate = Math.abs((long) occurrenceRequestCode * 31L + 17L);
+        }
+        return (int) candidate;
+    }
+
+    private static String buildSessionToken(int alarmId, int occurrenceRequestCode) {
+        return "alarm_" + alarmId + "_occurrence_" + occurrenceRequestCode;
+    }
+
+    private static int parseRequestCode(String value, int fallback) {
+        if (value == null) return fallback;
+        try {
+            return Integer.parseInt(value);
+        } catch (NumberFormatException ignored) {
+            return fallback;
+        }
+    }
+
+    private static void updateRecurringOccurrenceStatus(
+            Context context,
+            int alarmId,
+            int requestCode,
+            String newStatus
+    ) {
+        SharedPreferences prefs =
+                context.getSharedPreferences(String.valueOf(alarmId), Context.MODE_PRIVATE);
+        Set<String> saved =
+                new HashSet<>(prefs.getStringSet("KEY_REQUEST_CODES", new HashSet<>()));
+        Set<String> updated = new HashSet<>();
+        boolean found = false;
+
+        for (String item : saved) {
+            String[] parts = item.split("::", 2);
+            if (parts.length > 0 && parts[0].equals(String.valueOf(requestCode))) {
+                updated.add(requestCode + "::" + newStatus);
+                found = true;
+            } else {
+                updated.add(item);
+            }
+        }
+
+        if (!found) {
+            updated.add(requestCode + "::" + newStatus);
+        }
+
+        prefs.edit().putStringSet("KEY_REQUEST_CODES", updated).apply();
+    }
+
+    private static void updateOneTimeStatus(
+            Context context,
+            int alarmId,
+            String title,
+            String oldStatus,
+            String newStatus
+    ) {
+        try {
+            String updatedTitle = title.contains(oldStatus)
+                    ? title.replace(oldStatus, newStatus)
+                    : title;
+            AlarmDatabase.getInstance(context)
+                    .alarmDao()
+                    .updateAlarmTitle(alarmId, updatedTitle);
+        } catch (Exception e) {
+            Log.e(TAG, "Unable to update alarm status", e);
+        }
+    }
+
+    private static void reloadHome() {
+        try {
+            if (HomeFrag.ins != null) {
+                HomeFrag.ins.reload();
+            }
+        } catch (Exception e) {
+            Log.w(TAG, "Home screen could not be refreshed", e);
+        }
+    }
+
+    private static void sendStatusNotification(Context context, String title, String message) {
+        try {
+            Intent updateIntent = new Intent(context, AlwaysOnService.class);
+            updateIntent.putExtra("title", title);
+            updateIntent.putExtra("message", message);
+            context.startService(updateIntent);
+        } catch (Exception e) {
+            Log.w(TAG, "Status service could not be started", e);
+        }
+    }
+
+    private static String safeTitle(String title) {
+        return title == null || title.trim().isEmpty() ? "Meeting::ACTIVE" : title;
+    }
+
+    private static String displayTitle(String title) {
+        String[] parts = title.split("::", 2);
+        return parts.length == 0 || parts[0].trim().isEmpty() ? "Meeting" : parts[0];
     }
 }

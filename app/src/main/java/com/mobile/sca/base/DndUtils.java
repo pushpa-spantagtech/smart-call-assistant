@@ -3,23 +3,34 @@ package com.mobile.sca.base;
 import android.app.NotificationManager;
 import android.content.Context;
 
-public class DndUtils {
+/**
+ * Low-level DND utility. Meeting code should use DndSessionManager so
+ * overlapping meetings and previous DND state are handled correctly.
+ */
+public final class DndUtils {
 
-    public static void setDnd(Context context, boolean enable) {
+    private DndUtils() {
+    }
 
+    public static boolean hasAccess(Context context) {
+        NotificationManager nm =
+                (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
+        return nm != null && nm.isNotificationPolicyAccessGranted();
+    }
+
+    public static boolean setDnd(Context context, boolean enable) {
         NotificationManager nm =
                 (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
 
-        if (!nm.isNotificationPolicyAccessGranted()) return;
-
-        if (enable) {
-            nm.setInterruptionFilter(
-                    NotificationManager.INTERRUPTION_FILTER_NONE
-            );
-        } else {
-            nm.setInterruptionFilter(
-                    NotificationManager.INTERRUPTION_FILTER_ALL
-            );
+        if (nm == null || !nm.isNotificationPolicyAccessGranted()) {
+            return false;
         }
+
+        nm.setInterruptionFilter(
+                enable
+                        ? NotificationManager.INTERRUPTION_FILTER_NONE
+                        : NotificationManager.INTERRUPTION_FILTER_ALL
+        );
+        return true;
     }
 }

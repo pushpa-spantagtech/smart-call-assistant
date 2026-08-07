@@ -1,103 +1,103 @@
 package com.mobile.sca.base;
 
-import android.annotation.SuppressLint;
-import android.app.AlarmManager;
-import android.app.PendingIntent;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.util.Log;
-import android.widget.Toast;
 
+import com.mobile.sca.AlarmDatabase;
 import com.mobile.sca.AlarmEntity;
 
-import java.util.Calendar;
-import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 public class BootCompletedReceiver extends BroadcastReceiver {
 
-    Context context;
+    private static final String TAG = "BootReceiver";
 
     @Override
     public void onReceive(Context context, Intent intent) {
+        String action = intent.getAction();
+        if (!Intent.ACTION_BOOT_COMPLETED.equals(action)
+                && !Intent.ACTION_LOCKED_BOOT_COMPLETED.equals(action)
+                && !Intent.ACTION_MY_PACKAGE_REPLACED.equals(action)) {
+            return;
+        }
 
-        this.context = context;
+        final PendingResult pendingResult = goAsync();
+        final Context appContext = context.getApplicationContext();
 
-        if (Intent.ACTION_BOOT_COMPLETED.equals(intent.getAction())) {
-            Toast.makeText(context, "Boot Completed!!", Toast.LENGTH_SHORT).show();
-            // Fetch ACTIVE alarms from DB / SharedPref
-//            List<AlarmEntity> activeAlarms =
-//                    AlarmDatabase.getInstance(context)
-//                            .alarmDao()
-//                            .getAllAlarms();
-//
-//            for (AlarmEntity alarm : activeAlarms) {
-//               // AlarmScheduler.schedule(context, alarm);
-//                saveAlarm(alarm);
-//            }
+        new Thread(() -> {
+            try {
+                restoreActiveDndSessions(appContext);
+                restoreFutureMeetingAlarms(appContext);
+            } catch (Exception e) {
+                Log.e(TAG, "Failed to restore alarms after reboot/update", e);
+            } finally {
+                pendingResult.finish();
+            }
+        }, "sca-alarm-restore").start();
+    }
+
+    private void restoreActiveDndSessions(Context context) {
+        Set<DndSessionManager.SessionInfo> sessions =
+                DndSessionManager.reconcileAfterBoot(context);
+
+        for (DndSessionManager.SessionInfo session : sessions) {
+            ParsedToken parsed = ParsedToken.from(session.token);
+            AlarmReceiver.scheduleEndAlarm(
+                    context,
+                    parsed.alarmId,
+                    parsed.occurrenceRequestCode,
+                    session.token,
+                    session.endAtMillis,
+                    session.title,
+                    parsed.isRecurring ? 1 : -1
+            );
         }
     }
 
-    private void saveAlarm(AlarmEntity alarm) {
+    private void restoreFutureMeetingAlarms(Context context) {
+        List<AlarmEntity> alarms = AlarmDatabase.getInstance(context)
+                .alarmDao()
+                .getAllAlarms();
 
-        if (alarm.endday != 0) {
-            //scheduleWeeklyAlarmsWithDate(context, alarm);
-            TimeUtils.scheduleWeeklyAlarmsWithDate(context, alarm);
-        } else if (alarm.days.isEmpty()) {
-            if (alarm.title.contains("ACTIVE")) {
+        long now = System.currentTimeMillis();
+        for (AlarmEntity alarm : alarms) {
+            if (alarm == null || alarm.title == null) continue;
+            if (alarm.title.contains("Completed") || alarm.title.contains("CANCELLED")) continue;
+
+            if (alarm.endday != 0 && alarm.days != null && !alarm.days.trim().isEmpty()) {
+                TimeUtils.scheduleWeeklyAlarmsWithDate(context, alarm);
+            } else if ((alarm.days == null || alarm.days.trim().isEmpty())
+                    && alarm.title.contains("ACTIVE")
+                    && TimeUtils.getOneTimeTriggerMillis(alarm) > now) {
                 TimeUtils.scheduleOneTimeAlarm(context, alarm);
             }
         }
     }
 
-    @SuppressLint("ScheduleExactAlarm")
-    public static void scheduleWeeklyAlarmsWithDate(Context context, AlarmEntity alarm) {
-        SharedPreferences prefs =
-                context.getSharedPreferences("" + alarm.id, Context.MODE_PRIVATE);
+    private static final class ParsedToken {
+        final int alarmId;
+        final int occurrenceRequestCode;
+        final boolean isRecurring;
 
-        Set<String> savedSet =
-                prefs.getStringSet("KEY_REQUEST_CODES", new HashSet<>());
-        for (String item : savedSet) {
-            Log.e("AdapterItem", item);
-            if (item.contains("ACTIVE")) {
+        private ParsedToken(int alarmId, int occurrenceRequestCode, boolean isRecurring) {
+            this.alarmId = alarmId;
+            this.occurrenceRequestCode = occurrenceRequestCode;
+            this.isRecurring = isRecurring;
+        }
 
-                Calendar startCal = Calendar.getInstance();
-                startCal.set(Calendar.YEAR, alarm.year);
-                startCal.set(Calendar.MONTH, alarm.month);
-                startCal.set(Calendar.DAY_OF_MONTH, alarm.day);
-                startCal.set(Calendar.HOUR_OF_DAY, 0);
-                startCal.set(Calendar.MINUTE, 0);
-                startCal.set(Calendar.SECOND, 0);
-                startCal.set(Calendar.MILLISECOND, 0);
-
-                Intent intent = new Intent(context, AlarmReceiver.class);
-                intent.putExtra("ALARM_ID", alarm.id);
-                intent.putExtra("TURN_ON", true);
-                intent.putExtra("DURATION_MS", alarm.duration * 60L * 1000L);
-                intent.putExtra("DAY_OF_WEEK", "1");
-                intent.putExtra("TITLE", alarm.title);
-
-                int requestCode = Integer.parseInt(item.split("::")[0]);
-
-                intent.putExtra("Req", item.split("::")[0]);
-
-                PendingIntent pi = PendingIntent.getBroadcast(
-                        context,
-                        requestCode,
-                        intent,
-                        PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE
-                );
-
-                AlarmManager am = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
-                am.setExactAndAllowWhileIdle(
-                        AlarmManager.RTC_WAKEUP,
-                        startCal.getTimeInMillis(),
-                        pi
-                );
+        static ParsedToken from(String token) {
+            try {
+                String[] parts = token.split("_");
+                int alarmId = Integer.parseInt(parts[1]);
+                int occurrence = Integer.parseInt(parts[3]);
+                return new ParsedToken(alarmId, occurrence, alarmId != occurrence);
+            } catch (Exception ignored) {
+                int fallback = token == null ? 0 : token.hashCode();
+                return new ParsedToken(fallback, fallback, false);
             }
         }
     }
-
 }

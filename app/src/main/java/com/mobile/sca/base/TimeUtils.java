@@ -6,6 +6,7 @@ import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.os.Build;
 import android.util.Log;
 
 import com.mobile.sca.AlarmDatabase;
@@ -91,8 +92,8 @@ public class TimeUtils {
 
         AlarmManager am = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
 
-        am.setExactAndAllowWhileIdle(
-                AlarmManager.RTC_WAKEUP,
+        scheduleAlarmSafely(
+                am,
                 cal.getTimeInMillis(),
                 pi
         );
@@ -154,8 +155,8 @@ public class TimeUtils {
             AlarmManager am =
                     (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
 
-            am.setExactAndAllowWhileIdle(
-                    AlarmManager.RTC_WAKEUP,
+            scheduleAlarmSafely(
+                    am,
                     cal.getTimeInMillis(),
                     pi
             );
@@ -257,8 +258,8 @@ public class TimeUtils {
                     Log.e("Alarm Date..>>>.....", "" + cal.getTime());
                     Log.e("requestCode", "" + requestCode);
                     AlarmManager am = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
-                    am.setExactAndAllowWhileIdle(
-                            AlarmManager.RTC_WAKEUP,
+                    scheduleAlarmSafely(
+                            am,
                             cal.getTimeInMillis(),
                             pi
                     );
@@ -377,4 +378,76 @@ public class TimeUtils {
 
         Log.e("AlarmCancel", "All scheduled alarms cancelled for: " + alarm.title);
     }
+    @SuppressLint("ScheduleExactAlarm")
+    private static void scheduleAlarmSafely(
+            AlarmManager alarmManager,
+            long triggerAtMillis,
+            PendingIntent pendingIntent
+    ) {
+        if (alarmManager == null) {
+            Log.e("TimeUtils", "AlarmManager is unavailable");
+            return;
+        }
+
+        try {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S
+                    && !alarmManager.canScheduleExactAlarms()) {
+                Log.w(
+                        "TimeUtils",
+                        "Exact alarm permission is unavailable. Using an inexact fallback alarm."
+                );
+
+                alarmManager.setAndAllowWhileIdle(
+                        AlarmManager.RTC_WAKEUP,
+                        triggerAtMillis,
+                        pendingIntent
+                );
+                return;
+            }
+
+            alarmManager.setExactAndAllowWhileIdle(
+                    AlarmManager.RTC_WAKEUP,
+                    triggerAtMillis,
+                    pendingIntent
+            );
+
+        } catch (SecurityException exception) {
+            Log.e(
+                    "TimeUtils",
+                    "Exact alarm scheduling failed. Using an inexact fallback alarm.",
+                    exception
+            );
+
+            try {
+                alarmManager.setAndAllowWhileIdle(
+                        AlarmManager.RTC_WAKEUP,
+                        triggerAtMillis,
+                        pendingIntent
+                );
+            } catch (SecurityException fallbackException) {
+                Log.e(
+                        "TimeUtils",
+                        "Fallback alarm scheduling also failed.",
+                        fallbackException
+                );
+            }
+        }
+    }
+
+
+    public static long getOneTimeTriggerMillis(AlarmEntity alarm) {
+
+        Calendar cal = Calendar.getInstance();
+
+        cal.set(Calendar.YEAR, alarm.year);
+        cal.set(Calendar.MONTH, alarm.month);
+        cal.set(Calendar.DAY_OF_MONTH, alarm.day);
+        cal.set(Calendar.HOUR_OF_DAY, to24Hour(alarm.hour, alarm.amPm));
+        cal.set(Calendar.MINUTE, alarm.minute);
+        cal.set(Calendar.SECOND, 0);
+        cal.set(Calendar.MILLISECOND, 0);
+
+        return cal.getTimeInMillis();
+    }
+
 }

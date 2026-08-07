@@ -1,4 +1,3 @@
-<?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
@@ -25,38 +24,29 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:targetApi="31">
-
         <activity
             android:name=".SplashActivity"
             android:exported="true"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme">
-
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-
         </activity>
-
         <activity
             android:name=".setupActivity"
             android:exported="false"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme" />
-
         <activity
             android:name=".home"
             android:exported="false"
             android:screenOrientation="portrait" />
-
         <activity
             android:name=".AlarmListActivity"
             android:exported="false"
             android:screenOrientation="portrait" />
-
-
         <activity
             android:name=".HelpFaqActivity"
             android:exported="false"
@@ -66,22 +56,18 @@
             android:name=".base.signup"
             android:exported="false"
             android:screenOrientation="portrait" />
-
         <activity
             android:name=".base.forgotpassword"
             android:exported="false"
             android:screenOrientation="portrait" />
-
         <activity
             android:name=".base.login"
             android:exported="false"
             android:screenOrientation="portrait" />
-
         <activity
             android:name=".base.welcome"
             android:exported="false"
             android:screenOrientation="portrait" />
-
         <activity
             android:name=".base.permissioncheck"
             android:exported="false"
@@ -90,27 +76,23 @@
         <receiver
             android:name=".base.AlarmReceiver"
             android:exported="false" />
-
         <receiver
             android:name=".DndOffReceiver"
             android:exported="false" />
-
         <receiver
             android:name=".base.BootCompletedReceiver"
             android:enabled="true"
             android:exported="true">
-
             <intent-filter>
                 <action android:name="android.intent.action.BOOT_COMPLETED" />
+                <action android:name="android.intent.action.LOCKED_BOOT_COMPLETED" />
+                <action android:name="android.intent.action.MY_PACKAGE_REPLACED" />
             </intent-filter>
-
         </receiver>
 
         <service
             android:name=".base.AlwaysOnService"
             android:exported="false"
             android:foregroundServiceType="dataSync" />
-
     </application>
-
 </manifest>
