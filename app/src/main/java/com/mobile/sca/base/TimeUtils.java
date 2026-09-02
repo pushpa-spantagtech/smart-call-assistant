@@ -378,6 +378,7 @@ public class TimeUtils {
 
         Log.e("AlarmCancel", "All scheduled alarms cancelled for: " + alarm.title);
     }
+
     @SuppressLint("ScheduleExactAlarm")
     private static void scheduleAlarmSafely(
             AlarmManager alarmManager,

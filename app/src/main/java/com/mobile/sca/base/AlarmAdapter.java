@@ -745,7 +745,7 @@ public class AlarmAdapter extends RecyclerView.Adapter<AlarmAdapter.ViewHolder> 
 
     /**
      * Cancel a ONE-TIME schedule.
-     *
+     * <p>
      * Also ends DND immediately if the meeting has
      * already started.
      */
@@ -891,7 +891,7 @@ public class AlarmAdapter extends RecyclerView.Adapter<AlarmAdapter.ViewHolder> 
     /**
      * Called when user manually switches OFF a
      * weekly/date-range schedule.
-     *
+     * <p>
      * It finds any occurrence that has already FIRED,
      * cancels that occurrence's END alarm and removes
      * its DND session.

@@ -8,10 +8,10 @@ android {
     compileSdk = 36
 
     defaultConfig {
-        applicationId = "com.mobile.sca"
+        applicationId = "com.smallcallassistant"
         minSdk = 29
         targetSdk = 36
-        versionCode = 1
+        versionCode = 4
         versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
@@ -43,6 +43,7 @@ android {
 
 dependencies {
 
+    implementation("com.microsoft.clarity:clarity:3.8.3")
     implementation("androidx.core:core-ktx:1.13.1")
     implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.7.0")
     implementation("androidx.activity:activity-compose:1.9.0")
