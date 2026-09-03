@@ -11,7 +11,7 @@ android {
         applicationId = "com.smallcallassistant"
         minSdk = 29
         targetSdk = 36
-        versionCode = 4
+        versionCode = 6
         versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"

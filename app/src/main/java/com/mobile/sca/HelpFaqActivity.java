@@ -20,10 +20,10 @@ public class HelpFaqActivity extends AppCompatActivity {
 
     // Change these two values with your real support details
     private static final String SUPPORT_EMAIL =
-            "support@yourdomain.com";
+            "info@spantagtech.com";
 
     private static final String SUPPORT_PHONE =
-            "+919876543210";
+            "+91 9876543210";
 
     @Override
     protected void onCreate(
