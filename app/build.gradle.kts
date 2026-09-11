@@ -11,7 +11,7 @@ android {
         applicationId = "com.smallcallassistant"
         minSdk = 29
         targetSdk = 36
-        versionCode = 6
+        versionCode = 9
         versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
@@ -61,6 +61,7 @@ dependencies {
     implementation("com.github.dhaval2404:imagepicker:2.1")
     implementation("com.github.qamarelsafadi:CurvedBottomNavigation:0.1.3")
     implementation("com.github.bumptech.glide:glide:4.16.0")
+
     annotationProcessor("com.github.bumptech.glide:compiler:4.16.0")
 
     implementation("com.github.f0ris.sweetalert:library:1.6.2")

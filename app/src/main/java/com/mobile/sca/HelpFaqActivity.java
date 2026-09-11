@@ -23,7 +23,7 @@ public class HelpFaqActivity extends AppCompatActivity {
             "info@spantagtech.com";
 
     private static final String SUPPORT_PHONE =
-            "+91 9876543210";
+            "+91 9842780836";
 
     @Override
     protected void onCreate(
