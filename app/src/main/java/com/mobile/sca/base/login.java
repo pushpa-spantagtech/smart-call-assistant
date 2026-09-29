@@ -1,5 +1,7 @@
 package com.mobile.sca.base;
 
+import com.mobile.sca.AppAnalytics;
+
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Rect;
@@ -70,6 +72,12 @@ public class login extends AppCompatActivity {
 
     private final ExecutorService executorService =
             Executors.newSingleThreadExecutor();
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        AppAnalytics.screen(this, AppAnalytics.LOGIN, getClass().getSimpleName());
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -681,6 +689,8 @@ public class login extends AppCompatActivity {
                             !responseBodyContainsExplicitFailure(
                                     responseBody
                             ))) {
+
+                AppAnalytics.authSuccess(this, false);
 
                 saveLoginSession(
                         phoneNumber,

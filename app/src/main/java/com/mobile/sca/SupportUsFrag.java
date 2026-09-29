@@ -23,6 +23,12 @@ public class SupportUsFrag extends Fragment {
     private static final String KEY_AUTH_TOKEN = "auth_token";
     private static final String KEY_PHONE = "phone";
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        AppAnalytics.screen(requireContext(), AppAnalytics.SUPPORT, getClass().getSimpleName());
+    }
+
     @Nullable
     @Override
     public View onCreateView(
@@ -95,6 +101,7 @@ public class SupportUsFrag extends Fragment {
                         (dialog, which) -> {
 
                             dialog.dismiss();
+                            AppAnalytics.click(requireContext(), AppAnalytics.LOGOUT, AppAnalytics.SUPPORT);
                             performLogout();
                         }
                 )

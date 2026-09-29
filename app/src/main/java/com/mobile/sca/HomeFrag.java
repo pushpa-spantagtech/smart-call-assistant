@@ -35,6 +35,12 @@ public class HomeFrag extends Fragment {
 
     static RecyclerView recyclerView;
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        AppAnalytics.screen(requireContext(), AppAnalytics.HOME, getClass().getSimpleName());
+    }
+
     @SuppressLint("ScheduleExactAlarm")
     @Nullable
     @Override
@@ -52,6 +58,7 @@ public class HomeFrag extends Fragment {
         add.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                AppAnalytics.click(requireContext(), AppAnalytics.ADD_SCHEDULER, AppAnalytics.HOME);
                 home.instance.moveTab(2);
             }
         });

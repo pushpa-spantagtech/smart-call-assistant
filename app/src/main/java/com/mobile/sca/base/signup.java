@@ -1,5 +1,7 @@
 package com.mobile.sca.base;
 
+import com.mobile.sca.AppAnalytics;
+
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -61,6 +63,12 @@ public class signup extends AppCompatActivity {
 
     private final ExecutorService executorService =
             Executors.newSingleThreadExecutor();
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        AppAnalytics.screen(this, AppAnalytics.SIGNUP, getClass().getSimpleName());
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -818,6 +826,8 @@ public class signup extends AppCompatActivity {
             if (responseCode >= 200 &&
                     responseCode < 300 &&
                     finalSuccess) {
+
+                AppAnalytics.authSuccess(this, true);
 
                 showRegistrationSuccessDialog(
                         TextUtils.isEmpty(finalMessage)

@@ -1,5 +1,7 @@
 package com.mobile.sca.base;
 
+import com.mobile.sca.AppAnalytics;
+
 import static android.content.Context.MODE_PRIVATE;
 
 import android.annotation.SuppressLint;
@@ -484,6 +486,8 @@ public class AlarmAdapter extends RecyclerView.Adapter<AlarmAdapter.ViewHolder> 
                             builder.setPositiveButton(
                                     "Yes, Turn Off",
                                     (dialog, which) -> {
+
+                                        AppAnalytics.click(context, AppAnalytics.TURN_OFF_SCHEDULE, AppAnalytics.HOME);
 
                                         /*
                                          * DATE-RANGE / WEEKLY SCHEDULE
@@ -1111,6 +1115,8 @@ public class AlarmAdapter extends RecyclerView.Adapter<AlarmAdapter.ViewHolder> 
                             DialogInterface dialog,
                             int id
                     ) {
+
+                        AppAnalytics.click(context, AppAnalytics.DELETE_SCHEDULE, AppAnalytics.HOME);
 
                         /*
                          * IMPORTANT:

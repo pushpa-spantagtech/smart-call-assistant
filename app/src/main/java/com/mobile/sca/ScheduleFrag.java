@@ -93,6 +93,12 @@ public class ScheduleFrag extends Fragment {
         return count;
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        AppAnalytics.screen(requireContext(), AppAnalytics.SCHEDULER, getClass().getSimpleName());
+    }
+
     @SuppressLint({"WrongViewCast", "SetTextI18n"})
     @Nullable
     @Override
@@ -237,7 +243,13 @@ public class ScheduleFrag extends Fragment {
         });
 
         // Save alarm
-        saveAlarmBtn.setOnClickListener(v -> saveAlarm());
+        saveAlarmBtn.setOnClickListener(v -> {
+            AppAnalytics.click(requireContext(),
+                    dates.getVisibility() == VISIBLE
+                            ? AppAnalytics.ADD_SCHEDULER : AppAnalytics.SCHEDULE_NOW,
+                    AppAnalytics.SCHEDULER);
+            saveAlarm();
+        });
 
         SharedPreferences pref = requireActivity().getSharedPreferences("app", MODE_PRIVATE);
         String json = pref.getString("alarm", null);

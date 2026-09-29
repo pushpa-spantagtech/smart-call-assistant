@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "884996076037",
+    "project_id": "my-smart-call-assistant",
+    "storage_bucket": "my-smart-call-assistant.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:884996076037:android:1b58f7c9ff1637b6fca26c",
+        "android_client_info": {
+          "package_name": "com.smallcallassistant"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDAWKoFzQ1ktS8kwn7OUakfbntSvprylV8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
